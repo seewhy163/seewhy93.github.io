@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>闲池阁</title>
+  <title>Android fragment介绍 | 闲池阁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="闲池阁">
-<meta property="og:url" content="http://acewhy.com/index.html">
+  <meta name="description" content="介绍fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。
+通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。
+如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。
+基本使用方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android fragment介绍">
+<meta property="og:url" content="http://acewhy.com/2015/05/09/fragment解析/index.html">
 <meta property="og:site_name" content="闲池阁">
-<meta property="og:description">
+<meta property="og:description" content="介绍fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。
+通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。
+如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。
+基本使用方式">
+<meta property="og:image" content="http://7xiw1r.com1.z0.glb.clouddn.com/fragment_lifecycle.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闲池阁">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Android fragment介绍">
+<meta name="twitter:description" content="介绍fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。
+通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。
+如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。
+基本使用方式">
   
     <link rel="alternative" href="/atom.xml" title="闲池阁" type="application/atom+xml">
   
@@ -168,9 +178,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-fragment解析" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-fragment解析" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/05/09/fragment解析/" class="article-date">
@@ -186,12 +194,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/fragment解析/">Android fragment介绍</a>
+    <h1 class="article-title" itemprop="name">
+      Android fragment介绍
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fragment/">fragment</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -238,77 +257,61 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fragment/">fragment</a></li></ul>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/05/04/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">test</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="fragment解析" data-title="Android fragment介绍" data-url="http://acewhy.com/2015/05/09/fragment解析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"seewhy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/04/test/" class="article-date">
-  	<time datetime="2015-05-03T16:31:40.000Z" itemprop="datePublished">2015-05-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/04/test/">test</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://acewhy.com/"/>
-  <updated>2015-05-03T16:31:40.000Z</updated>
+  <updated>2015-05-10T16:23:44.000Z</updated>
   <id>http://acewhy.com/</id>
   
   <author>
@@ -13,6 +13,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android fragment介绍]]></title>
+    <link href="http://acewhy.com/2015/05/09/fragment%E8%A7%A3%E6%9E%90/"/>
+    <id>http://acewhy.com/2015/05/09/fragment解析/</id>
+    <published>2015-05-09T01:26:04.000Z</published>
+    <updated>2015-05-10T16:23:44.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
+<p>通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。</p>
+<p>如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。</p>
+<h1 id="基本使用方式">基本使用方式</h1><h2 id="静态使用">静态使用</h2><p> 首先创建一个简单的布局文件fragment_simple.xml，当做fragment的布局，里面代码如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span> <span class="attribute">android:text</span>=<span class="value">"这是一个简单的fragment"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后新建文件SimpleFragment, 继承自Fragment，重写onCreateView方法</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function">View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">return</span> inflater.<span class="title">inflate</span><span class="params">(R.layout.fragment_simple, container, <span class="keyword">false</span>)</span></span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>最后在需要使用的activity中加入，通过name属性指定具体使用哪一个fragment</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;fragment</span><br><span class="line">       android:<span class="variable">id=</span><span class="string">"@+id/fragment_static"</span></span><br><span class="line">       android:<span class="variable">name=</span><span class="string">"com.example.seewhy.androidfragmentdemo.SimpleFragment"</span></span><br><span class="line">       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span></span><br><span class="line">       android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="动态使用">动态使用</h2><p>通过fragment可以使程序在运行过程中替换某一块界面，比如我想在点击一个button之后显示一块内容。<br>先要在布局文件中创建一个容器,定义id为container。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;FrameLayout</span><br><span class="line">       android:<span class="variable">id=</span><span class="string">"@+id/container"</span></span><br><span class="line">       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span></span><br><span class="line">       android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>然后在button的onClick中写如下面这段代码，实现将container替换为自己需要的fragment。</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> manager = getFragmentManager<span class="literal">()</span>;</span><br><span class="line"><span class="type">FragmentTransaction</span> transaction = manager.beginTransaction<span class="literal">()</span>;</span><br><span class="line">transaction.replace(<span class="type">R</span>.id.container, <span class="keyword">new</span> <span class="type">SimpleFragment</span><span class="literal">()</span>);</span><br><span class="line">transaction.commit<span class="literal">()</span>;</span><br></pre></td></tr></table></figure>
+<p>同理，还可以使用FragmentTransaction进行add、remove、hide等操作。</p>
+<h1 id="使用v4包还是app包">使用v4包还是app包</h1><p>fragment同时存在于android.support.v4.app和android.app两个包中。其中v4包是为了使android 3.0之前的系统能够使用fragment而存在。选择的时候，如果能够确保使用环境在android 3.0以上，那么应该使用app包中的fragment。Android官方文档中的Fragment的例子也是以app包中的Fragment来讲解的。如果需要兼容低版本android,那么就使用v4，v4包最低能兼容到android 1.6。<br>    但是，项目中不能同时存在v4和app两个包中的fragment,只能选择其中一个使用。<br>以下是在v4包中使用fragment的注意事项</p>
+<ol>
+<li>如果使用了v4包的fragment，那么所在的Activity一定要继承FragmentActivity。</li>
+<li>FragmentManager()需要换成getSupportFragmentManager()</li>
+</ol>
+<h1 id="生命周期">生命周期</h1><p>这个是从官网找来的fragment生命周期图,可以看到Fragment比Activity多了几个额外的生命周期回调方法：</p>
+<ul>
+<li><p>onAttach(Activity)-<br>当Fragment与Activity发生关联时调用。</p>
+</li>
+<li><p>onCreateView(LayoutInflater, ViewGroup,Bundle)<br>创建该Fragment的视图</p>
+</li>
+<li><p>onActivityCreated(Bundle)<br>当Activity的onCreate方法返回时调用</p>
+</li>
+<li><p>onDestoryView()<br>与onCreateView想对应，当该Fragment的视图被移除时调</p>
+</li>
+<li><p>onDetach()<br>与onAttach相对应，当Fragment与Activity关联被取消时调用<br>注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现，</p>
+</li>
+</ul>
+<p><img src="http://7xiw1r.com1.z0.glb.clouddn.com/fragment_lifecycle.png" alt=""></p>
+<h1 id="参考资料">参考资料</h1><ul>
+<li><a href="http://www.it165.net/pro/html/201411/26897.html" target="_blank" rel="external">Fragment用app包还是v4包解析</a> </li>
+<li><a href="http://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">官方fragment使用指南</a></li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/37970961" target="_blank" rel="external">Android Fragment 真正的完全解析</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
+<p>通过fragment可以方便的实现在多个activity]]>
+    </summary>
+    
+      <category term="Android" scheme="http://acewhy.com/tags/Android/"/>
+    
+      <category term="fragment" scheme="http://acewhy.com/tags/fragment/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[test]]></title>
