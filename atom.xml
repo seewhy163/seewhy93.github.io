@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://acewhy.com/"/>
-  <updated>2015-05-10T17:18:24.000Z</updated>
+  <updated>2015-05-11T03:31:08.000Z</updated>
   <id>http://acewhy.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://acewhy.com/2015/05/09/fragment%E8%A7%A3%E6%9E%90/"/>
     <id>http://acewhy.com/2015/05/09/fragment解析/</id>
     <published>2015-05-09T01:26:04.000Z</published>
-    <updated>2015-05-10T17:18:24.000Z</updated>
+    <updated>2015-05-11T03:31:08.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
 <p>通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。</p>
 <p>如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。</p>
@@ -53,6 +53,14 @@
 </li>
 </ul>
 <p><img src="http://7xiw1r.com1.z0.glb.clouddn.com/fragment_lifecycle.png" alt=""></p>
+<h1 id="其他">其他</h1><p>以上介绍了fragment基本的使用方式。<br>官方还提供了ListFragment用于显示在listview,<br>FragmentPagerAdapter用于fragment与pagerAdapter结合使用。<br>如果需要在pageAdapter切换时保留fragment的数据，可以使用FragmentStatePagerAdapter。</p>
+<blockquote>
+<p>FragmentPagerAdapter：对于不再需要的fragment，选择调用detach方法，仅销毁视图，并不会销毁fragment实例。</p>
+<p>FragmentStatePagerAdapter：会销毁不再需要的fragment，当当前事务提交以后，会彻底的将fragmeng从当前Activity的FragmentManager中移除，state标明，销毁时，会将其onSaveInstanceState(Bundle outState)中的bundle信息保存下来，当用户切换回来，可以通过该bundle恢复生成新的fragment，也就是说，你可以在onSaveInstanceState(Bundle outState)方法中保存一些数据，在onCreate中进行恢复创建。</p>
+<p>如上所说，使用FragmentStatePagerAdapter当然更省内存，但是销毁新建也是需要时间的。一般情况下，如果你是制作主页面，就3、4个Tab，那么可以选择使用FragmentPagerAdapter，如果你是用于ViewPager展示数量特别多的条目时，那么建议使用FragmentStatePagerAdapter。</p>
+</blockquote>
+<p>还有最新的sdk已经把TabActivity标记为deprecated，如果要实现tabbar的效果，应该使用FragmentTabHost。</p>
+<p>DialogFragment在android 3.0时被引入。是一种特殊的Fragment，用于在Activity的内容之上展示一个模态的对话框。典型的用于：展示警告框，输入框，确认框等等。<a href="http://blog.csdn.net/lmj623565791/article/details/37815413" target="_blank" rel="external">具体可以看这里</a></p>
 <h1 id="参考资料">参考资料</h1><ul>
 <li><a href="http://www.it165.net/pro/html/201411/26897.html" target="_blank" rel="external">Fragment用app包还是v4包解析</a> </li>
 <li><a href="http://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">官方fragment使用指南</a></li>
