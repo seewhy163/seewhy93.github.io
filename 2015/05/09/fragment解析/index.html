@@ -11,13 +11,14 @@
 基本使用方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android fragment">
-<meta property="og:url" content="http://acewhy.com/2015/05/09/fragment解析/index.html">
+<meta property="og:url" content="http://seewhy93.github.io/2015/05/09/fragment解析/index.html">
 <meta property="og:site_name" content="闲池阁">
 <meta property="og:description" content="介绍fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。
 通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。
 如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。
 基本使用方式">
 <meta property="og:image" content="http://7xiw1r.com1.z0.glb.clouddn.com/fragment_lifecycle.png">
+<meta property="og:updated_time" content="2015-05-11T03:31:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android fragment">
 <meta name="twitter:description" content="介绍fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。
@@ -116,7 +117,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a><a href="/tags/fragment/" style="font-size: 10px;">fragment</a><a href="/tags/面试/" style="font-size: 20px;">面试</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
 					</div>
 				</section>
 				
@@ -223,11 +224,11 @@
 <p>然后新建文件SimpleFragment, 继承自Fragment，重写onCreateView方法</p>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function">View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">return</span> inflater.<span class="title">inflate</span><span class="params">(R.layout.fragment_simple, container, <span class="keyword">false</span>)</span></span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>最后在需要使用的activity中加入，通过name属性指定具体使用哪一个fragment</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;fragment</span><br><span class="line">       android:<span class="variable">id=</span><span class="string">"@+id/fragment_static"</span></span><br><span class="line">       android:<span class="variable">name=</span><span class="string">"com.example.seewhy.androidfragmentdemo.SimpleFragment"</span></span><br><span class="line">       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span></span><br><span class="line">       android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;fragment</span><br><span class="line">       android:<span class="property">id</span>=<span class="string">"@+id/fragment_static"</span></span><br><span class="line">       android:<span class="property">name</span>=<span class="string">"com.example.seewhy.androidfragmentdemo.SimpleFragment"</span></span><br><span class="line">       android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">       android:layout_height=<span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="动态使用">动态使用</h2><p>通过fragment可以使程序在运行过程中替换某一块界面，比如我想在点击一个button之后显示一块内容。<br>先要在布局文件中创建一个容器,定义id为container。</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;FrameLayout</span><br><span class="line">       android:<span class="variable">id=</span><span class="string">"@+id/container"</span></span><br><span class="line">       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span></span><br><span class="line">       android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;FrameLayout</span><br><span class="line">       android:<span class="property">id</span>=<span class="string">"@+id/container"</span></span><br><span class="line">       android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">       android:layout_height=<span class="string">"match_parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
 <p>然后在button的onClick中写如下面这段代码，实现将container替换为自己需要的fragment。<br>其中transaction就是事务的意思，在manager.beginTransaction与transaction.commit();之间的代码，要么全部执行成功，如果某一步执行失败，那么之前执行的也都会被撤销，保证事务的原子性。</p>
-<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> manager = getFragmentManager<span class="literal">()</span>;</span><br><span class="line"><span class="type">FragmentTransaction</span> transaction = manager.beginTransaction<span class="literal">()</span>;</span><br><span class="line">transaction.replace(<span class="type">R</span>.id.container, <span class="keyword">new</span> <span class="type">SimpleFragment</span><span class="literal">()</span>);</span><br><span class="line">transaction.commit<span class="literal">()</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FragmentManager manager = getFragmentManager();</span><br><span class="line">FragmentTransaction <span class="keyword">transaction</span> = manager.beginTransaction();</span><br><span class="line"><span class="keyword">transaction</span>.replace(R.<span class="property">id</span>.container, new SimpleFragment());</span><br><span class="line"><span class="keyword">transaction</span>.commit();</span><br></pre></td></tr></table></figure>
 <p>常用的FragmentTransaction操作有add、remove、hide、addToBackStack等等。</p>
 <h1 id="使用v4包还是app包">使用v4包还是app包</h1><p>fragment同时存在于android.support.v4.app和android.app两个包中。其中v4包是为了使android 3.0之前的系统能够使用fragment而存在。选择的时候，如果能够确保使用环境在android 3.0以上，那么应该使用app包中的fragment。Android官方文档中的Fragment的例子也是以app包中的Fragment来讲解的。如果需要兼容低版本android,那么就使用v4，v4包最低能兼容到android 1.6。<br>    但是，项目中不能同时存在v4和app两个包中的fragment,只能选择其中一个使用。<br>以下是在v4包中使用fragment的注意事项</p>
 <ol>
@@ -305,7 +306,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="fragment解析" data-title="Android fragment" data-url="http://acewhy.com/2015/05/09/fragment解析/"></div>
+	<div class="ds-thread" data-thread-key="fragment解析" data-title="Android fragment" data-url="http://seewhy93.github.io/2015/05/09/fragment解析/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
