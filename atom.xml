@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-09-29T16:49:29.000Z</updated>
+  <updated>2015-09-29T16:58:57.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://seewhy93.github.io/2015/09/29/%E4%BD%BF%E7%94%A8python%E5%AE%8C%E6%88%90%E9%87%8D%E5%A4%8D%E4%BB%BB%E5%8A%A1/"/>
     <id>http://seewhy93.github.io/2015/09/29/使用python完成重复任务/</id>
     <published>2015-09-29T15:33:10.000Z</published>
-    <updated>2015-09-29T16:49:29.000Z</updated>
+    <updated>2015-09-29T16:58:57.000Z</updated>
     <content type="html"><![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
 <p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
 <p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
@@ -29,7 +29,7 @@
 </ol>
 <p>最后还是决定用python来实现，可以复习一下python语法，顺便学一下文件操作。<br>以后碰到类似的任务，也可以同样的方法解决了。<br>因为xhdpi中的文件比其他文件夹中要多几个，而且xhdpi中也有些中文名，并没有改掉，多余代码<br>中也特殊处理了下。</p>
 <p>当时想用图像识别的方法自动完成映射，看了篇图像识别的<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2325027" target="_blank" rel="external">博客</a>，但是担心识别率不高而且时间不够，所以还是使用肉眼识别了。过几天再仔细研究下。</p>
-<p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。</p>
+<p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。<br>用到的文件操作基本都在<a href="http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html" target="_blank" rel="external">这里</a>，主要就是判断路径存在，创建文件夹以及移到文件了。</p>
 <pre><code>import os
 import shutil
 <span class="built_in">source</span>_dir = <span class="string">'E:\\source\\'</span>

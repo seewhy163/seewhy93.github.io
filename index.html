@@ -205,7 +205,7 @@
 </ol>
 <p>最后还是决定用python来实现，可以复习一下python语法，顺便学一下文件操作。<br>以后碰到类似的任务，也可以同样的方法解决了。<br>因为xhdpi中的文件比其他文件夹中要多几个，而且xhdpi中也有些中文名，并没有改掉，多余代码<br>中也特殊处理了下。</p>
 <p>当时想用图像识别的方法自动完成映射，看了篇图像识别的<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2325027" target="_blank" rel="external">博客</a>，但是担心识别率不高而且时间不够，所以还是使用肉眼识别了。过几天再仔细研究下。</p>
-<p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。</p>
+<p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。<br>用到的文件操作基本都在<a href="http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html" target="_blank" rel="external">这里</a>，主要就是判断路径存在，创建文件夹以及移到文件了。</p>
 <pre><code>import os
 import shutil
 <span class="built_in">source</span>_dir = <span class="string">'E:\\source\\'</span>
