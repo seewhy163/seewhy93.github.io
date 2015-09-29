@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-09-29T17:00:16.000Z</updated>
+  <updated>2015-09-29T17:14:13.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://seewhy93.github.io/2015/09/29/%E4%BD%BF%E7%94%A8python%E5%AE%8C%E6%88%90%E9%87%8D%E5%A4%8D%E4%BB%BB%E5%8A%A1/"/>
     <id>http://seewhy93.github.io/2015/09/29/使用python完成重复任务/</id>
     <published>2015-09-29T15:33:10.000Z</published>
-    <updated>2015-09-29T17:00:16.000Z</updated>
+    <updated>2015-09-29T17:14:13.000Z</updated>
     <content type="html"><![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
 <p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
 <p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
@@ -27,6 +27,7 @@
 <li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
 <li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
 </ol>
+<a id="more"></a>
 <p>最后还是决定用python来实现，可以复习一下python语法，顺便学一下文件操作。<br>以后碰到类似的任务，也可以同样的方法解决了。<br>因为xhdpi中的文件比其他文件夹中要多几个，而且xhdpi中也有些中文名，并没有改掉，多余代码<br>中也特殊处理了下。</p>
 <p>当时想用图像识别的方法自动完成映射，看了篇图像识别的<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2325027" target="_blank" rel="external">博客</a>，但是担心识别率不高而且时间不够，所以还是使用肉眼识别了。过几天再仔细研究下。</p>
 <p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。<br>用到的文件操作基本都在<a href="http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html" target="_blank" rel="external">这里</a>，主要就是判断路径存在，创建文件夹以及移动文件了。</p>
@@ -80,7 +81,14 @@ name_map = {
 <p>这次事件感觉也算是对黑客精神一次小小的实践了吧。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个]]>
+    <![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
+<p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
+<p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
+<ol>
+<li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
+<li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
+</ol>]]>
+    
     </summary>
     
       <category term="python" scheme="http://seewhy93.github.io/tags/python/"/>
@@ -94,7 +102,7 @@ name_map = {
     <link href="http://seewhy93.github.io/2015/08/31/baishiinterview/"/>
     <id>http://seewhy93.github.io/2015/08/31/baishiinterview/</id>
     <published>2015-08-31T11:15:46.000Z</published>
-    <updated>2015-08-31T11:26:03.000Z</updated>
+    <updated>2015-09-29T17:16:20.000Z</updated>
     <content type="html"><![CDATA[<p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
 <p>问的问题：</p>
 <h1 id="安卓方面">安卓方面</h1><ul>
@@ -106,6 +114,7 @@ name_map = {
 </li>
 <li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
 </ul>
+<a id="more"></a>
 <h1 id="网络方面">网络方面</h1><ul>
 <li><p>网络的七层架构?<br>7 应用层 6 表示层 5 会话层 4 传输层 3 网络层 2 数据链路层 1 物理层<br>我说的时候会话层和物理层没有说出来。</p>
 </li>
@@ -149,7 +158,15 @@ name_map = {
     <![CDATA[<p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
 <p>问的问题：</p>
 <h1 id="安卓方面">安卓方面</h1><ul>
-<li><p>activity生命周期。<br>都说出]]>
+<li><p>activity生命周期。<br>都说出来了。</p>
+</li>
+<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
+</li>
+<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
+</li>
+<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
+</ul>]]>
+    
     </summary>
     
       <category term="面试" scheme="http://seewhy93.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
@@ -161,13 +178,14 @@ name_map = {
     <link href="http://seewhy93.github.io/2015/07/15/xiangweninterview/"/>
     <id>http://seewhy93.github.io/2015/07/15/xiangweninterview/</id>
     <published>2015-07-15T12:13:40.000Z</published>
-    <updated>2015-07-15T17:16:36.000Z</updated>
+    <updated>2015-09-29T17:16:12.000Z</updated>
     <content type="html"><![CDATA[<p>昨天接到一个电话，说是在网上看到我的简历，问要不要去面试。<br>上一次面试是阿里的，结果惨败。于是想见识一些普通公司的面试，就答应了。<br>然后就定在今天下午。</p>
 <p>提前一天下了他们公司的app，是做动态壁纸的，效果做的很酷炫。<br>这里应该能想到面试会问动画的问题，但是完全没有准备。结果今天问到动画就说不会。</p>
 <p>下午两点多来到公司，然后填了一张表格就开始面试了。</p>
 <p>一面比较随意，面试官感觉就比我大几岁。</p>
 <p>下面是大致对话内容<br>“你的字写得好难看”</p>
 <p>“嗯，是的”</p>
+<a id="more"></a>
 <p>“做的好多啊，c#，ios都做过。”</p>
 <p>“但是都学得很水的。”</p>
 <p>后来问了在github上有没有参与过什么开源项目。</p>
@@ -217,7 +235,12 @@ name_map = {
 ]]></content>
     <summary type="html">
     <![CDATA[<p>昨天接到一个电话，说是在网上看到我的简历，问要不要去面试。<br>上一次面试是阿里的，结果惨败。于是想见识一些普通公司的面试，就答应了。<br>然后就定在今天下午。</p>
-<p>提前一天下了他们公司的app，是做动态壁纸的，效果做的很酷炫。<br>这里应该能想到面试会问动]]>
+<p>提前一天下了他们公司的app，是做动态壁纸的，效果做的很酷炫。<br>这里应该能想到面试会问动画的问题，但是完全没有准备。结果今天问到动画就说不会。</p>
+<p>下午两点多来到公司，然后填了一张表格就开始面试了。</p>
+<p>一面比较随意，面试官感觉就比我大几岁。</p>
+<p>下面是大致对话内容<br>“你的字写得好难看”</p>
+<p>“嗯，是的”</p>]]>
+    
     </summary>
     
       <category term="面试" scheme="http://seewhy93.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
@@ -229,10 +252,11 @@ name_map = {
     <link href="http://seewhy93.github.io/2015/05/09/fragment%E8%A7%A3%E6%9E%90/"/>
     <id>http://seewhy93.github.io/2015/05/09/fragment解析/</id>
     <published>2015-05-09T01:26:04.000Z</published>
-    <updated>2015-05-11T03:31:08.000Z</updated>
+    <updated>2015-09-29T17:16:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
 <p>通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。</p>
 <p>如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。</p>
+<a id="more"></a>
 <h1 id="基本使用方式">基本使用方式</h1><h2 id="静态使用">静态使用</h2><p> 首先创建一个简单的布局文件fragment_simple.xml，当做fragment的布局，里面代码如下</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span> <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span> <span class="attribute">android:text</span>=<span class="value">"这是一个简单的fragment"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>然后新建文件SimpleFragment, 继承自Fragment，重写onCreateView方法</p>
@@ -279,7 +303,9 @@ name_map = {
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
-<p>通过fragment可以方便的实现在多个activity]]>
+<p>通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。</p>
+<p>如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。</p>]]>
+    
     </summary>
     
       <category term="Android" scheme="http://seewhy93.github.io/tags/Android/"/>

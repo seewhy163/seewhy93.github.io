@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="闲池阁">
 <meta property="og:description" content="事件背景:接到一个任务，要我完成对很多文件改名字的操作。任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”答: “以后可能需要。”好吧..
 于是我又跟他说，android studio的重命名快捷键也可以对">
-<meta property="og:updated_time" content="2015-09-29T17:00:16.000Z">
+<meta property="og:updated_time" content="2015-09-29T17:14:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用python完成重复任务">
 <meta name="twitter:description" content="事件背景:接到一个任务，要我完成对很多文件改名字的操作。任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”答: “以后可能需要。”好吧..
@@ -216,6 +216,7 @@
 <li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
 <li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
 </ol>
+<a id="more"></a>
 <p>最后还是决定用python来实现，可以复习一下python语法，顺便学一下文件操作。<br>以后碰到类似的任务，也可以同样的方法解决了。<br>因为xhdpi中的文件比其他文件夹中要多几个，而且xhdpi中也有些中文名，并没有改掉，多余代码<br>中也特殊处理了下。</p>
 <p>当时想用图像识别的方法自动完成映射，看了篇图像识别的<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2325027" target="_blank" rel="external">博客</a>，但是担心识别率不高而且时间不够，所以还是使用肉眼识别了。过几天再仔细研究下。</p>
 <p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。<br>用到的文件操作基本都在<a href="http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html" target="_blank" rel="external">这里</a>，主要就是判断路径存在，创建文件夹以及移动文件了。</p>
