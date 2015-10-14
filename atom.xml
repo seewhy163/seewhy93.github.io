@@ -169,6 +169,165 @@ var <span class="operator"><span class="keyword">handler</span> = new <span clas
   </entry>
   
   <entry>
+    <title><![CDATA[使用python完成重复任务]]></title>
+    <link href="http://seewhy93.github.io/2015/09/29/%E4%BD%BF%E7%94%A8python%E5%AE%8C%E6%88%90%E9%87%8D%E5%A4%8D%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://seewhy93.github.io/2015/09/29/使用python完成重复任务/</id>
+    <published>2015-09-29T15:33:10.000Z</published>
+    <updated>2015-09-29T17:14:13.000Z</updated>
+    <content type="html"><![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
+<p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
+<p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
+<ol>
+<li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
+<li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
+</ol>
+<a id="more"></a>
+<p>最后还是决定用python来实现，可以复习一下python语法，顺便学一下文件操作。<br>以后碰到类似的任务，也可以同样的方法解决了。<br>因为xhdpi中的文件比其他文件夹中要多几个，而且xhdpi中也有些中文名，并没有改掉，多余代码<br>中也特殊处理了下。</p>
+<p>当时想用图像识别的方法自动完成映射，看了篇图像识别的<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2325027" target="_blank" rel="external">博客</a>，但是担心识别率不高而且时间不够，所以还是使用肉眼识别了。过几天再仔细研究下。</p>
+<p>下面是具体的代码,其中name_map写了六十几条，这里省略了很多。<br>用到的文件操作基本都在<a href="http://www.cnblogs.com/rollenholt/archive/2012/04/23/2466179.html" target="_blank" rel="external">这里</a>，主要就是判断路径存在，创建文件夹以及移动文件了。</p>
+<pre><code>import os
+import shutil
+<span class="built_in">source</span>_dir = <span class="string">'E:\\source\\'</span>
+target_dir = <span class="string">'E:\\target\\'</span>
+mdpi = <span class="string">'mipmap-mdpi'</span>
+hdpi = <span class="string">'mipmap-hdpi'</span>
+xhdpi = <span class="string">'mipmap-xhdpi'</span>
+xxhdpi = <span class="string">'mipmap-xxhdpi'</span>
+xxxhdpi = <span class="string">'mipmap-xxxhdpi'</span>
+dpi_list = [mdpi, hdpi, xxhdpi, xxxhdpi]
+
+name_map = {
+<span class="string">'address_select_img'</span>:<span class="string">'地址-点击'</span>,<span class="string">'cart_select_img'</span>:<span class="string">'购物车-点击'</span>
+}
+
+<span class="built_in">source</span>_name = os.listdir(<span class="built_in">source</span>_dir + xhdpi)
+<span class="built_in">print</span>(len(name_map.keys()))
+<span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">source</span>_name:
+    <span class="comment">#英文名</span>
+    target_name = name.split(<span class="string">'.'</span>)[<span class="number">0</span>] 
+
+    <span class="keyword">for</span> dpi <span class="keyword">in</span> dpi_list:
+        dst_dir = target_dir + dpi
+        <span class="keyword">if</span> False == os.path.exists(dst_dir):
+                os.mkdir(dst_dir)
+
+        <span class="keyword">if</span> name_map.keys().__contains__(target_name):
+
+            src = <span class="built_in">source</span>_dir + dpi + <span class="string">'\\'</span> + name_map[target_name] + <span class="string">'.png'</span>
+
+            <span class="keyword">if</span> os.path.exists(src):
+
+                dst = dst_dir + <span class="string">'\\'</span> + target_name + <span class="string">'.png'</span>
+                shutil.copyfile(src, dst)
+
+            <span class="keyword">else</span>:
+                <span class="built_in">print</span>(<span class="string">'file '</span> + src + <span class="string">' not exists'</span>)
+        <span class="keyword">else</span>:
+            <span class="keyword">if</span> os.path.exists(<span class="built_in">source</span>_dir + dpi + <span class="string">'\\'</span> + name):
+                shutil.copyfile(<span class="built_in">source</span>_dir + dpi + <span class="string">'\\'</span> + name, dst_dir + <span class="string">'\\'</span> + name)
+            <span class="keyword">else</span>:
+                <span class="built_in">print</span>(<span class="string">'file '</span> + name + <span class="string">' also not exists'</span>)
+</code></pre><p>想起了小时候看过的一篇文章<br><a href="http://www.myhack58.com/Article/60/76/2015/59238.htm" target="_blank" rel="external">如何成为一名黑客</a><br>我对下面这句话印象很深刻：</p>
+<blockquote>
+<p>黑客（以及所有创造力的人们）都不应该被愚蠢的重复性劳动所困扰。重复性劳动浪费了他们解决新问题的时间，而解决新问题正是黑客最大的价值所在。这种浪费会伤害到每一个人。无聊和乏味的工作不仅仅是令人不舒服而已，而且本身就是一种罪恶。</p>
+<p>作为一个黑客，你必须坚信这点并尽可能多地将乏味的工作自动化，这不仅是为了你自己，也是为了其他人（尤其是其他黑客们）。</p>
+</blockquote>
+<p>这次事件感觉也算是对黑客精神一次小小的实践了吧。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
+<p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
+<p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
+<ol>
+<li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
+<li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="python" scheme="http://seewhy93.github.io/tags/python/"/>
+    
+      <category term="效率" scheme="http://seewhy93.github.io/tags/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[百世实习生面试总结]]></title>
+    <link href="http://seewhy93.github.io/2015/08/31/baishiinterview/"/>
+    <id>http://seewhy93.github.io/2015/08/31/baishiinterview/</id>
+    <published>2015-08-31T11:15:46.000Z</published>
+    <updated>2015-09-29T17:16:20.000Z</updated>
+    <content type="html"><![CDATA[<p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
+<p>问的问题：</p>
+<h1 id="安卓方面">安卓方面</h1><ul>
+<li><p>activity生命周期。<br>都说出来了。</p>
+</li>
+<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/" target="_blank" rel="external">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
+</li>
+<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
+</li>
+<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
+</ul>
+<a id="more"></a>
+<h1 id="网络方面">网络方面</h1><ul>
+<li><p>网络的七层架构?<br>7 应用层 6 表示层 5 会话层 4 传输层 3 网络层 2 数据链路层 1 物理层<br>我说的时候会话层和物理层没有说出来。</p>
+</li>
+<li><p>tcp 与 udp的区别，在哪一层？<br>可靠与不可靠。接收端有无检测等等。<br>在传输层。</p>
+</li>
+<li><p>socket的作用，运行在哪一层？<br>不是很了解，只回答传输数据的</p>
+</li>
+<li><p>http与https的区别<br>只说了https更安全。。具体的也不知道</p>
+</li>
+</ul>
+<h1 id="数据库方面">数据库方面</h1><ul>
+<li><p>distinct的作用<br>去除一个表中某个字段重复的，用于返回唯一不同的值。。</p>
+</li>
+<li><p>我说用过orm，为什么要用orm?<br>因为好奇，而且方便，提供了编译检查，然后说了下编译检查的好处。</p>
+</li>
+<li><p>如果让我实现一个orm会用到哪些技术？<br>用反射获取一个类的各种属性来生成数据库的表和字段。<br>注解定义关键字方便orm的使用。</p>
+</li>
+</ul>
+<h1 id="语法方面">语法方面</h1><ul>
+<li><p>java的新特性<br>我回答了最希望看到的就是java 8中的lambda表达式。问了lambad的原理，不清楚。</p>
+</li>
+<li><p>我说写过c#，问我c#中的委托用过吗，是怎么样的？<br>不清楚怎么表达，结果就说感觉是代理模式的一种实现。然后就问了一下单例模式。<br>其实应该回答类似于c++的函数指针，通过间接的方式调用其他函数的。</p>
+</li>
+</ul>
+<h1 id="算法方面">算法方面</h1><ul>
+<li><p>有哪些排序算法，时间复杂度是多少？<br>冒泡，选择，快速排序，堆排序，桶排序等等。<br>冒泡选择是O(N^2),快排是O(n*logN)</p>
+</li>
+<li><p>冒泡与选择的区别？<br>代码肯定会写，但不知道怎么描述，大概说了一下选择是先找出最小的放到第一个，冒泡是左右两个比较。</p>
+</li>
+<li><p>存储图的方式有哪几个？<br>答：邻接矩阵与邻接表。</p>
+</li>
+<li><p>求最短路的方法？<br>答：迪杰斯特拉算法,spfa算法，但是具体过程回答的很模糊，没有准备。</p>
+</li>
+<li><p>有一块机械表，一天中时分秒重合的次数？<br>这个要在纸上写出具体代码，想了一下就是遍历一天中所有秒数，然后算出三个指针的角度进行比较。<br>写完后他问我有没有更好的办法，没有想出来。</p>
+</li>
+</ul>
+<p>因为知道我做过ACM,然后问了模拟退火算法，神经网络，遗传算法，只是要求大概的讲讲<br>只知道和人工智能有关，基本说不上来= =。</p>
+<p>面完过了一会儿hr就告诉我，说我基础不错，应该能进，然后过了4个小时offer就发过来了，还是挺开心的。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
+<p>问的问题：</p>
+<h1 id="安卓方面">安卓方面</h1><ul>
+<li><p>activity生命周期。<br>都说出来了。</p>
+</li>
+<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
+</li>
+<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
+</li>
+<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="面试" scheme="http://seewhy93.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[象文面试总结]]></title>
     <link href="http://seewhy93.github.io/2015/07/15/xiangweninterview/"/>
     <id>http://seewhy93.github.io/2015/07/15/xiangweninterview/</id>
