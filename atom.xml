@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-10-14T12:08:26.000Z</updated>
+  <updated>2015-10-14T12:16:44.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://seewhy93.github.io/2015/10/14/stethoIntroduce/"/>
     <id>http://seewhy93.github.io/2015/10/14/stethoIntroduce/</id>
     <published>2015-10-14T12:07:44.000Z</published>
-    <updated>2015-10-14T12:08:26.000Z</updated>
+    <updated>2015-10-14T12:16:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>stetho是facebook开发的Android调试工具。它可以通过chrome的开发者工具来辅助安卓开发。<br>总的来说，提供了一下几个功能：</p>
 <ul>
 <li>通过Elements标签查看界面的视图结构。</li>
@@ -28,6 +28,7 @@
 <li>通过Console标签，在这里执行js语句，可以在APP上弹出一个Toast。</li>
 <li>dumpapp 是linux/mac上使用的命令行工具，可以修改app内部资源，暂时未详细了解。</li>
 </ul>
+<a id="more"></a>
 <h2 id="准备">准备</h2><p>在使用之前需要先引用需要的包。<br>通过语句</p>
 <pre><code><span class="string">"compile 'com.facebook.stetho:stetho:1.2.0 "</span>
 </code></pre><p>来引用stetho。</p>
@@ -161,7 +162,12 @@ var <span class="operator"><span class="keyword">handler</span> = new <span clas
     <![CDATA[<h1 id="介绍">介绍</h1><p>stetho是facebook开发的Android调试工具。它可以通过chrome的开发者工具来辅助安卓开发。<br>总的来说，提供了一下几个功能：</p>
 <ul>
 <li>通过Elements标签查看界面的视图结构。</li>
-<l]]>
+<li>通过Network标签观察网络请求。</li>
+<li>通过Resources标签查看本地数据，比如sqlite数据库，sharepreference等等。同时可以在这里执行sql语句。</li>
+<li>通过Console标签，在这里执行js语句，可以在APP上弹出一个Toast。</li>
+<li>dumpapp 是linux/mac上使用的命令行工具，可以修改app内部资源，暂时未详细了解。</li>
+</ul>]]>
+    
     </summary>
     
       <category term="工具" scheme="http://seewhy93.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
