@@ -17,7 +17,7 @@ adb shell ps| grep xx">
 使用多进程可以在AndroidManifest中通过设置android:process属性，或者在jni中fork一个进程进程名 :remote :的含义是指在前面附加包名，并且属于私有进程。其他应用的组件不能和它在同一个进程。不以:开头的进程可以通过SharedUID跑在同一个进程，但是要求两个应用签名相同。同一进程可以相互访问私有数据。
 
 adb shell ps| grep xx">
-<meta property="og:updated_time" content="2015-11-17T14:49:36.000Z">
+<meta property="og:updated_time" content="2015-11-17T14:57:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开发艺术探索》读书笔记 第二章  IPC机制">
 <meta name="twitter:description" content="2.2.1
@@ -304,7 +304,8 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h2 id="AIDL权限验证">AIDL权限验证</h2><p>在manifest中声明需要的权限</p>
-<p><permission android:name="me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE" android:protectionlevel="normal"><br>然后在onBinder中验证</permission></p>
+<pre><code>&lt;permission <span class="string">android:</span>name=<span class="string">"me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE"</span> <span class="string">android:</span>protectionLevel=<span class="string">"normal"</span>/&gt;
+</code></pre><p>然后在onBinder中验证</p>
 <pre><code><span class="annotation">@Nullable</span>
 <span class="annotation">@Override</span>
 <span class="keyword">public</span> <span class="function">IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
@@ -328,7 +329,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2015/11/17/artsearchreadnote1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">《Android开发艺术探索》读书笔记 第一章activity生命周期与启动模式</div>
+      <div class="article-nav-title">《Android开发艺术探索》读书笔记 第一章 生命周期与启动模式</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

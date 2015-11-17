@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-11-17T14:49:36.000Z</updated>
+  <updated>2015-11-17T14:57:36.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote2/"/>
     <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote2/</id>
     <published>2015-11-17T14:37:48.000Z</published>
-    <updated>2015-11-17T14:49:36.000Z</updated>
+    <updated>2015-11-17T14:57:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="2-2-1">2.2.1</h1><ul>
 <li><p>使用多进程可以在AndroidManifest中通过设置android:process属性，或者在jni中fork一个进程<br>进程名 :remote :的含义是指在前面附加包名，并且属于私有进程。其他应用的组件不能和它在同一个进程。<br>不以:开头的进程可以通过SharedUID跑在同一个进程，但是要求两个应用签名相同。同一进程可以相互访问私有数据。</p>
 </li>
@@ -93,7 +93,8 @@
 </li>
 </ul>
 <h2 id="AIDL权限验证">AIDL权限验证</h2><p>在manifest中声明需要的权限</p>
-<p><permission android:name="me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE" android:protectionlevel="normal"><br>然后在onBinder中验证</permission></p>
+<pre><code>&lt;permission <span class="string">android:</span>name=<span class="string">"me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE"</span> <span class="string">android:</span>protectionLevel=<span class="string">"normal"</span>/&gt;
+</code></pre><p>然后在onBinder中验证</p>
 <pre><code><span class="annotation">@Nullable</span>
 <span class="annotation">@Override</span>
 <span class="keyword">public</span> <span class="function">IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
@@ -137,11 +138,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[《Android开发艺术探索》读书笔记 第一章activity生命周期与启动模式]]></title>
+    <title><![CDATA[《Android开发艺术探索》读书笔记 第一章 生命周期与启动模式]]></title>
     <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote1/"/>
     <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote1/</id>
     <published>2015-11-17T13:38:42.000Z</published>
-    <updated>2015-11-17T14:49:51.000Z</updated>
+    <updated>2015-11-17T14:59:05.000Z</updated>
     <content type="html"><![CDATA[<p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
 <h1 id="1-1-1_典型情况生命周期分析">1.1.1 典型情况生命周期分析</h1><ul>
 <li><p>onStart、onResume与onPause、onStop有什么实质不同？<br>onStart、onStop是从是否可见来描述，onResume和onPause是从是否可与用户交互的角度。</p>
