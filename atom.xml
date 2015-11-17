@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-11-17T14:05:21.000Z</updated>
+  <updated>2015-11-17T14:49:36.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -15,11 +15,133 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Android开发艺术探索 第一章activity生命周期与启动模式]]></title>
+    <title><![CDATA[《Android开发艺术探索》读书笔记 第二章  IPC机制]]></title>
+    <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote2/"/>
+    <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote2/</id>
+    <published>2015-11-17T14:37:48.000Z</published>
+    <updated>2015-11-17T14:49:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="2-2-1">2.2.1</h1><ul>
+<li><p>使用多进程可以在AndroidManifest中通过设置android:process属性，或者在jni中fork一个进程<br>进程名 :remote :的含义是指在前面附加包名，并且属于私有进程。其他应用的组件不能和它在同一个进程。<br>不以:开头的进程可以通过SharedUID跑在同一个进程，但是要求两个应用签名相同。同一进程可以相互访问私有数据。</p>
+</li>
+<li><p>adb shell ps| grep xxx  获取包含字符串的进程</p>
+</li>
+</ul>
+<h1 id="2-2-2">2.2.2</h1><p>多进程带来的问题</p>
+<ol>
+<li>静态成员和单例模式失效</li>
+<li>线程同步机制失效</li>
+<li>SharedPreference可靠性下降(sp不支持两个进程同时读写)</li>
+<li>Application会创建多次</li>
+</ol>
+<p>跨进程通信的方式</p>
+<ul>
+<li>intent</li>
+<li>共享文件和sharedPreference</li>
+<li>基于Binder的Messenger和AIDL</li>
+<li>Socket</li>
+<li>ContentProvider</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-3-1_Serializable">2.3.1 Serializable</h1><p>实现Serializable接口的类最好指定 serialVersionUID<br>不指定编译器会根据类结构生成hash来设置，当类结构改变时，反序列化会失败。<br>指定后，如果增加或删减成员，反序列化不会失败，但是改变类名或改变成员类型，会失败。</p>
+<h1 id="2-3-2">2.3.2</h1><ul>
+<li><p>Parcelable通过writeToParcel实现序列化<br>通过CREATOR实现反序列化。</p>
+</li>
+<li><p>Serializable实现简单开销大，需要大量I/O操作<br>Parcelable推荐用于内存序列化，序列化到存储设备或网络传输，过程复杂，建议Serializable</p>
+</li>
+</ul>
+<h1 id="2-3-3">2.3.3</h1><ul>
+<li>客户端发起远程请求时线程被挂起，不能放在UI线程。</li>
+<li><p>服务端的Binder方法运行在线程池中，应该用同步方法调用。</p>
+</li>
+<li><p>通过lindToDeath可以设置死亡代理，Binder死亡时会收到通知</p>
+</li>
+</ul>
+<h1 id="2-4-2">2.4.2</h1><p>通过文件共享，读写文件使用ObjectInputStream和ObjectOutStream</p>
+<h1 id="2-4-3">2.4.3</h1><ul>
+<li><p>messenger可以跨进程传递消息</p>
+</li>
+<li><p>Messenger构造函数的参数可以是IBinder，也可以是Handle（实际上是调用Handle的getIMessenger方法）。</p>
+</li>
+<li><p>activity与另一个进程的service通过Messenger通信，首先创建ServiceConnection，在onServiceConnected中获取IBinder类型的service对象，根据service创建一个Messenger，调用send方法发送Message消息。如果需要获取返回消息，可以为Message对象设置replyTo,<br>replyTo也是一个构造函数为Handle的Messenger对象。<br>最后在onCreate调用bindService绑定Service。</p>
+</li>
+</ul>
+<h1 id="2-4-4">2.4.4</h1><p>AIDL中支持的数据类型：</p>
+<pre><code><span class="bullet">1. </span>基本数据类型
+<span class="bullet">2. </span>String和CharSequence
+<span class="bullet">3. </span>List：只支持ArrayList并且里面每个元素必须被AIDL支持
+<span class="bullet">4. </span>Map:只支持HashMap，且里面每个元素被AIDL支持
+<span class="bullet">5. </span>Parcelable
+<span class="bullet">6. </span>AIDL:所以AIDL接口本身可以在AIDL文件中使用
+</code></pre><ul>
+<li><p>自定义Parcelable对象必须显示import进来</p>
+</li>
+<li><p>如果用到了自定义Parcelable对象，必须创建同名的AIDL文件，并在其中为他声明为Parcelable类型。</p>
+</li>
+<li><p>CopyOnWriteArrayList支持并发读写，类似的还有ConcurrentHashMap</p>
+</li>
+<li><p><a href="http://chenzehe.iteye.com/blog/1759884" target="_blank" rel="external">AtomicBoolean</a>的介绍</p>
+</li>
+<li><p>通过attach debuggger to android process 可以对其他进程断点调试</p>
+</li>
+<li><p>观察者模式，在客户端注册lintener后，不能直接通过unregisterListener取消。因为通过序列化传输listener，实际上已经是另一个对象。<br>因此需要使用RemoteCallbackList替代CopyOnWriteArrayList储存listenerList。<br>RemoteCallbackList内部有一个Map来存储listener,key是Binder对象。</p>
+</li>
+<li><p>RemoteCallbackList通过beginBroadCast获取数量，一定要跟finishBroadcast配对。</p>
+</li>
+<li><p>要注意Binder死亡，可以在服务端设置DeathRecipient监听，或者在客户端onServiceDisconnected监听。</p>
+</li>
+<li><p>DeathRecipient在binder线程池中回调, onServiceDisconnected在UI线程中回调。</p>
+</li>
+</ul>
+<h2 id="AIDL权限验证">AIDL权限验证</h2><p>在manifest中声明需要的权限</p>
+<p><permission android:name="me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE" android:protectionlevel="normal"><br>然后在onBinder中验证</permission></p>
+<pre><code><span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>{
+    <span class="keyword">int</span> check = checkCallingOrSelfPermission(<span class="string">"me.seewhy.lifecircle.permission.ACCESS_BOOK_SERVICE"</span>);
+    <span class="keyword">if</span> (check == PackageManager.PERMISSION_DENIED) {
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+    <span class="keyword">return</span> mBinder;
+}
+</code></pre><p>也可以重写onTransact方法，如果返回false表示验证失败。<br>String[] packages = getPackageManager().getPackagesForUid(getCallingUid());<br>然后根据包名验证</p>
+<h1 id="2-4-5">2.4.5</h1><p>onCreate、query、getType、insert、delete、update<br>ContentProvider的六个抽象方法除了onCreate在主线程，其他的都在Binder线程池中。</p>
+<p>（待续）</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="2-2-1">2.2.1</h1><ul>
+<li><p>使用多进程可以在AndroidManifest中通过设置android:process属性，或者在jni中fork一个进程<br>进程名 :remote :的含义是指在前面附加包名，并且属于私有进程。其他应用的组件不能和它在同一个进程。<br>不以:开头的进程可以通过SharedUID跑在同一个进程，但是要求两个应用签名相同。同一进程可以相互访问私有数据。</p>
+</li>
+<li><p>adb shell ps| grep xxx  获取包含字符串的进程</p>
+</li>
+</ul>
+<h1 id="2-2-2">2.2.2</h1><p>多进程带来的问题</p>
+<ol>
+<li>静态成员和单例模式失效</li>
+<li>线程同步机制失效</li>
+<li>SharedPreference可靠性下降(sp不支持两个进程同时读写)</li>
+<li>Application会创建多次</li>
+</ol>
+<p>跨进程通信的方式</p>
+<ul>
+<li>intent</li>
+<li>共享文件和sharedPreference</li>
+<li>基于Binder的Messenger和AIDL</li>
+<li>Socket</li>
+<li>ContentProvider</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[《Android开发艺术探索》读书笔记 第一章activity生命周期与启动模式]]></title>
     <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote1/"/>
     <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote1/</id>
     <published>2015-11-17T13:38:42.000Z</published>
-    <updated>2015-11-17T14:05:21.000Z</updated>
+    <updated>2015-11-17T14:49:51.000Z</updated>
     <content type="html"><![CDATA[<p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
 <h1 id="1-1-1_典型情况生命周期分析">1.1.1 典型情况生命周期分析</h1><ul>
 <li><p>onStart、onResume与onPause、onStop有什么实质不同？<br>onStart、onStop是从是否可见来描述，onResume和onPause是从是否可与用户交互的角度。</p>
@@ -43,6 +165,7 @@
 <li><p>转屏时触发onSaveInstanceState,如果要转屏时不触发，需要设置android:configChanges=”orientation”<br>如果是api&gt;=13,需设置android:configChanges=”orientation|screenSize”，<br>设置后转屏时回调 onConfigurationChanged</p>
 </li>
 </ul>
+<a id="more"></a>
 <h1 id="1-2-1_启动模式">1.2.1 启动模式</h1><ul>
 <li><p>在singleTop与singleTask时，如果activity已存在，不会触发onStart与onResume，而是onNewIntent</p>
 </li>
@@ -85,7 +208,28 @@
     <summary type="html">
     <![CDATA[<p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
 <h1 id="1-1-1_典型情况生命周期分析">1.1.1 典型情况生命周期分析</h1><ul>
-<li><p>onStart、onResume]]>
+<li><p>onStart、onResume与onPause、onStop有什么实质不同？<br>onStart、onStop是从是否可见来描述，onResume和onPause是从是否可与用户交互的角度。</p>
+</li>
+<li><p>在启动新activity时，先执行旧activity的onPause，然后再是新activiy的onCreate,onStart,onResume。</p>
+</li>
+<li><p>如果新的activity是透明的，那么原activity不会执行onStop。（没有变成不可见）</p>
+</li>
+<li><p>设置activity透明的方法</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowBackground"</span>&gt;@android:color/transparent&lt;/<span class="property">item</span>&gt;
+</code></pre></li>
+</ul>
+<h1 id="1-1-2_异常情况生命周期">1.1.2 异常情况生命周期</h1><ul>
+<li><p>系统在activity异常终止的时候会调用onSaveInstanceState存储数据，onRestoreInstanceState恢复数据。</p>
+</li>
+<li><p>按Home或启动新activity也会触发onSaveInstanceState。</p>
+</li>
+<li><p>内存不足时杀死进程会触发onSaveInstanceState、onRestoreInstanceState</p>
+</li>
+<li><p>转屏时触发onSaveInstanceState,如果要转屏时不触发，需要设置android:configChanges=”orientation”<br>如果是api&gt;=13,需设置android:configChanges=”orientation|screenSize”，<br>设置后转屏时回调 onConfigurationChanged</p>
+</li>
+</ul>]]>
+    
     </summary>
     
       <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
