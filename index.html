@@ -122,7 +122,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
 					</div>
 				</section>
 				
@@ -185,6 +185,125 @@ var _hmt = _hmt || [];
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-artsearchreadnote4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/23/artsearchreadnote4/" class="article-date">
+  	<time datetime="2015-11-23T12:56:08.000Z" itemprop="datePublished">2015-11-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/23/artsearchreadnote4/">Android开发艺术探索读书笔记 第四章 view的工作原理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="4-1">4.1</h1><p>ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时<br>会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。</p>
+<p>View的绘制流程从ViewRoot的performTraversals开始，依次调用performMeasure、performLayout、performDraw。。</p>
+<p>DecorView有一个子元素LinearLayout，里面是titleBar和content,这两个都是FrameLayout。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/23/artsearchreadnote4/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-artsearchreadnote3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/23/artsearchreadnote3/" class="article-date">
+  	<time datetime="2015-11-23T12:56:02.000Z" itemprop="datePublished">2015-11-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/23/artsearchreadnote3/">Android开发艺术探索读书笔记 第三章 view的事件体系</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="3-1-2_View的位置参数">3.1.2 View的位置参数</h1><p>x = left + translationX<br>y = top + translationY<br>在平移过程中,top和left表示原始左上角的位置信息，值不变。x,y,translationX和translationY改变。</p>
+<ul>
+<li>getX/getY返回相对于当前view左上角的坐标</li>
+<li>getRawX/getRawY返回相对于屏幕左上角的坐标</li>
+</ul>
+<h1 id="3-1-3">3.1.3</h1><p>TouchSlop是系统所能识别出的最小滑动距离，通过ViewConfiguration.get(getContext()).getScaledTouchSlop()获得</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/23/artsearchreadnote3/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-artsearchreadnote2" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -393,138 +512,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a  href="/2015/10/14/stethoIntroduce/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-使用python完成重复任务" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/29/使用python完成重复任务/" class="article-date">
-  	<time datetime="2015-09-29T15:33:10.000Z" itemprop="datePublished">2015-09-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/29/使用python完成重复任务/">使用python完成重复任务</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
-<p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
-<p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
-<ol>
-<li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
-<li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/效率/">效率</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/29/使用python完成重复任务/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-baishiinterview" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/31/baishiinterview/" class="article-date">
-  	<time datetime="2015-08-31T11:15:46.000Z" itemprop="datePublished">2015-08-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/31/baishiinterview/">百世实习生面试总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
-<p>问的问题：</p>
-<h1 id="安卓方面">安卓方面</h1><ul>
-<li><p>activity生命周期。<br>都说出来了。</p>
-</li>
-<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
-</li>
-<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
-</li>
-<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/31/baishiinterview/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

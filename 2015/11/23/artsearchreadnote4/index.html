@@ -3,33 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>百世实习生面试总结 | 闲池阁</title>
+  <title>Android开发艺术探索读书笔记 第四章 view的工作原理 | 闲池阁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总的来说感觉比较轻松，可能是因为这次只是实习生面试。面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。
-问的问题：
-安卓方面
-activity生命周期。都说出来了。
-
-activity的启动方式有哪些,singleTask与singleInstance的应用场景。场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。http://xiazdo">
+  <meta name="description" content="4.1ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。
+View的绘制流程从Vi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="百世实习生面试总结">
-<meta property="og:url" content="http://seewhy93.github.io/2015/08/31/baishiinterview/index.html">
+<meta property="og:title" content="Android开发艺术探索读书笔记 第四章 view的工作原理">
+<meta property="og:url" content="http://seewhy93.github.io/2015/11/23/artsearchreadnote4/index.html">
 <meta property="og:site_name" content="闲池阁">
-<meta property="og:description" content="总的来说感觉比较轻松，可能是因为这次只是实习生面试。面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。
-问的问题：
-安卓方面
-activity生命周期。都说出来了。
-
-activity的启动方式有哪些,singleTask与singleInstance的应用场景。场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。http://xiazdo">
-<meta property="og:updated_time" content="2015-09-29T17:16:20.000Z">
+<meta property="og:description" content="4.1ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。
+View的绘制流程从Vi">
+<meta property="og:updated_time" content="2015-11-23T13:07:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="百世实习生面试总结">
-<meta name="twitter:description" content="总的来说感觉比较轻松，可能是因为这次只是实习生面试。面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。
-问的问题：
-安卓方面
-activity生命周期。都说出来了。
-
-activity的启动方式有哪些,singleTask与singleInstance的应用场景。场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。http://xiazdo">
+<meta name="twitter:title" content="Android开发艺术探索读书笔记 第四章 view的工作原理">
+<meta name="twitter:description" content="4.1ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。
+View的绘制流程从Vi">
   
     <link rel="alternative" href="/atom.xml" title="闲池阁" type="application/atom+xml">
   
@@ -200,11 +188,11 @@ var _hmt = _hmt || [];
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-baishiinterview" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-artsearchreadnote4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/08/31/baishiinterview/" class="article-date">
-  	<time datetime="2015-08-31T11:15:46.000Z" itemprop="datePublished">2015-08-31</time>
+      <a href="/2015/11/23/artsearchreadnote4/" class="article-date">
+  	<time datetime="2015-11-23T12:56:08.000Z" itemprop="datePublished">2015-11-23</time>
 </a>
     </div>
   
@@ -217,7 +205,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      百世实习生面试总结
+      Android开发艺术探索读书笔记 第四章 view的工作原理
     </h1>
   
 
@@ -225,10 +213,6 @@ var _hmt = _hmt || [];
       
       <div class="article-info article-info-post">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-	</div>
-
         
 
         <div class="clearfix"></div>
@@ -237,57 +221,53 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
-<p>问的问题：</p>
-<h1 id="安卓方面">安卓方面</h1><ul>
-<li><p>activity生命周期。<br>都说出来了。</p>
-</li>
-<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/" target="_blank" rel="external">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
-</li>
-<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
-</li>
-<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
-</ul>
+        <h1 id="4-1">4.1</h1><p>ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时<br>会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。</p>
+<p>View的绘制流程从ViewRoot的performTraversals开始，依次调用performMeasure、performLayout、performDraw。。</p>
+<p>DecorView有一个子元素LinearLayout，里面是titleBar和content,这两个都是FrameLayout。</p>
 <a id="more"></a>
-<h1 id="网络方面">网络方面</h1><ul>
-<li><p>网络的七层架构?<br>7 应用层 6 表示层 5 会话层 4 传输层 3 网络层 2 数据链路层 1 物理层<br>我说的时候会话层和物理层没有说出来。</p>
-</li>
-<li><p>tcp 与 udp的区别，在哪一层？<br>可靠与不可靠。接收端有无检测等等。<br>在传输层。</p>
-</li>
-<li><p>socket的作用，运行在哪一层？<br>不是很了解，只回答传输数据的</p>
-</li>
-<li><p>http与https的区别<br>只说了https更安全。。具体的也不知道</p>
-</li>
+<h1 id="4-2-1">4.2.1</h1><p>MeasureSpec是一个32位int值，高2为表示SpecMode，低30位代表SpecSize。<br>SpecMode的三种类型：</p>
+<ol>
+<li>UNSPECIFIED<br>父容器不对View有任何限制，要多大给多大，一般用于系统内部表示测量状态。</li>
+<li>EXACTLY<br>父容器已经检测出View所需要的精确大小，view的大小就是SpecSize，对应于LayoutParams的match_parent和具体数值。</li>
+<li>AT_MOST<br>view的大小不能超过父容器指定的SpecSize，对应于wrap_content。</li>
+</ol>
+<h1 id="4-2-2">4.2.2</h1><p>LayoutParams需要和父容器一起才能决定View的MeasureSpec。<br>DecorView的MeasureSpec是由窗口的尺寸和LayoutParams决定。<br>当view采用固定宽高时，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并遵循Layoutparams中的大小。<br>当view采用wrap_content时，不管父容器的MeasureSpec是什么，View的MeasureSpec都是AT_MOST。<br>当view采用match_content时，当父容器是AT_MOST时，view也是AT_MOST。父容器是EXACTLY时，view也是EXACTLY。</p>
+<p>UNSPECIFIED主要用于系统内部多次Measure的情况，一般不需要关注。</p>
+<h1 id="4-3-1">4.3.1</h1><p>直接继承View的自定义控件需要重写onMeasure并设置wrap_content时的自身大小。否则就是父容器的剩余大小。<br>ViewGroup是一个抽象类，onMeasure由子类实现。</p>
+<p>getSuggestedMinimumWidth的逻辑：View如果没有背景，那么返回android:minWidth这个属性指定的值，这个值可以为0；如果设置了背景，则返回背景的最小宽度和minWidth中的较大值。<br>一个比较好的习惯是在onLayout方法中去获取View的测量宽高或最终宽高。</p>
+<p>获取view宽高的四种方法：</p>
+<ol>
+<li>Activity/View#onWindowFocusChanged<br>@Override<br>public void onWindowFocusChanged(boolean hasFocus) {<br> super.onWindowFocusChanged(hasFocus);<br> if (hasFocus) {<pre><code><span class="built_in">int</span> width = lv1.getMeasuredWidth<span class="literal">()</span>;
+<span class="type">Log</span>.d(<span class="type">TAG</span>, <span class="string">"test"</span> +width + <span class="string">" "</span>+lv1.getMeasuredHeight<span class="literal">()</span> );
+</code></pre> }<br>}</li>
+<li>view.post(runnable)</li>
+<li>ViewTreeObserver<br>当View树的状态发生改变或者内部view的可见性发生改变时，onGlobalLayout会被回调。</li>
+<li>view.measure(int widthMeasureSpec, int heightMeasureSpec)<br>第四种方法，view的measure需要根据viewLayoutParams来使用，<br>如果是具体数值<br>int widthSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);<br>int heightSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);<br>lv1.measure(widthSpec, heightSpec);<br>如果是wrap_content<br>int widthSpec = View.MeasureSpec.makeMeasureSpec((1&lt;&lt;30)-1, View.MeasureSpec.AT_MOST);<br>int heightSpec = View.MeasureSpec.makeMeasureSpec((1&lt;&lt;30)-1, View.MeasureSpec.AT_MOST);<br>lv1.measure(widthSpec, heightSpec);<br>match_parent无法算出，因为无法知道父容器的大小。<h1 id="4-3-2">4.3.2</h1>View的默认实现中，getWidth()和getMeasuredWidth()相等，只是赋值时机不同。<br>getWidth()是 mRight-mLeft，在layout中形成，另一个在measure中形成。<h1 id="4-3-3">4.3.3</h1>View有一个方法setWillNotDraw,设置后可以不绘制任何内容。ViewGroup默认开启，如果要绘制ViewGroup，要先关闭。<h1 id="4-4-2">4.4.2</h1></li>
+</ol>
+<ul>
+<li>如果继承view或ViewGroup，需要重写onMeasure支持wrap_content。</li>
+<li>考虑支持padding</li>
+<li>不要在view中使用Handler,有post方法。</li>
+<li>View中如果有线程或动画，要及时停止。参考View#onDetachedFromWindow,对应的是onAttachedToWindow。</li>
 </ul>
-<h1 id="数据库方面">数据库方面</h1><ul>
-<li><p>distinct的作用<br>去除一个表中某个字段重复的，用于返回唯一不同的值。。</p>
-</li>
-<li><p>我说用过orm，为什么要用orm?<br>因为好奇，而且方便，提供了编译检查，然后说了下编译检查的好处。</p>
-</li>
-<li><p>如果让我实现一个orm会用到哪些技术？<br>用反射获取一个类的各种属性来生成数据库的表和字段。<br>注解定义关键字方便orm的使用。</p>
-</li>
-</ul>
-<h1 id="语法方面">语法方面</h1><ul>
-<li><p>java的新特性<br>我回答了最希望看到的就是java 8中的lambda表达式。问了lambad的原理，不清楚。</p>
-</li>
-<li><p>我说写过c#，问我c#中的委托用过吗，是怎么样的？<br>不清楚怎么表达，结果就说感觉是代理模式的一种实现。然后就问了一下单例模式。<br>其实应该回答类似于c++的函数指针，通过间接的方式调用其他函数的。</p>
-</li>
-</ul>
-<h1 id="算法方面">算法方面</h1><ul>
-<li><p>有哪些排序算法，时间复杂度是多少？<br>冒泡，选择，快速排序，堆排序，桶排序等等。<br>冒泡选择是O(N^2),快排是O(n*logN)</p>
-</li>
-<li><p>冒泡与选择的区别？<br>代码肯定会写，但不知道怎么描述，大概说了一下选择是先找出最小的放到第一个，冒泡是左右两个比较。</p>
-</li>
-<li><p>存储图的方式有哪几个？<br>答：邻接矩阵与邻接表。</p>
-</li>
-<li><p>求最短路的方法？<br>答：迪杰斯特拉算法,spfa算法，但是具体过程回答的很模糊，没有准备。</p>
-</li>
-<li><p>有一块机械表，一天中时分秒重合的次数？<br>这个要在纸上写出具体代码，想了一下就是遍历一天中所有秒数，然后算出三个指针的角度进行比较。<br>写完后他问我有没有更好的办法，没有想出来。</p>
-</li>
-</ul>
-<p>因为知道我做过ACM,然后问了模拟退火算法，神经网络，遗传算法，只是要求大概的讲讲<br>只知道和人工智能有关，基本说不上来= =。</p>
-<p>面完过了一会儿hr就告诉我，说我基础不错，应该能进，然后过了4个小时offer就发过来了，还是挺开心的。</p>
-
+<p>margin是由父容器控制的。<br>重写onMeasure使wrap_content生效。</p>
+<pre><code><span class="keyword">int</span> mSize = <span class="number">200</span>;
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>{
+    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    <span class="keyword">int</span> wMode = MeasureSpec.getMode(widthMeasureSpec);
+    <span class="keyword">int</span> wSize = MeasureSpec.getSize(widthMeasureSpec);
+    <span class="keyword">int</span> hMode = MeasureSpec.getMode(heightMeasureSpec);
+    <span class="keyword">int</span> hSize = MeasureSpec.getSize(heightMeasureSpec);
+    <span class="keyword">if</span> (wMode == MeasureSpec.AT_MOST &amp;&amp; hMode == MeasureSpec.AT_MOST) {
+        setMeasuredDimension(mSize, mSize);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(wMode == MeasureSpec.AT_MOST)</span> </span>{
+        setMeasuredDimension(mSize, hSize);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(hMode == MeasureSpec.AT_MOST)</span> </span>{
+        setMeasuredDimension(wSize, mSize);
+    }
+}
+</code></pre>
       
     </div>
     
@@ -296,18 +276,9 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2015/09/29/使用python完成重复任务/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          使用python完成重复任务
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/15/xiangweninterview/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">象文面试总结</div>
+    <a href="/2015/11/23/artsearchreadnote3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android开发艺术探索读书笔记 第三章 view的事件体系</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -336,7 +307,7 @@ var _hmt = _hmt || [];
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="baishiinterview" data-title="百世实习生面试总结" data-url="http://seewhy93.github.io/2015/08/31/baishiinterview/"></div>
+	<div class="ds-thread" data-thread-key="artsearchreadnote4" data-title="Android开发艺术探索读书笔记 第四章 view的工作原理" data-url="http://seewhy93.github.io/2015/11/23/artsearchreadnote4/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

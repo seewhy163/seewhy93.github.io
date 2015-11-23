@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-11-17T14:57:36.000Z</updated>
+  <updated>2015-11-23T13:07:13.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -13,6 +13,196 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android开发艺术探索读书笔记 第四章 view的工作原理]]></title>
+    <link href="http://seewhy93.github.io/2015/11/23/artsearchreadnote4/"/>
+    <id>http://seewhy93.github.io/2015/11/23/artsearchreadnote4/</id>
+    <published>2015-11-23T12:56:08.000Z</published>
+    <updated>2015-11-23T13:07:13.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="4-1">4.1</h1><p>ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时<br>会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。</p>
+<p>View的绘制流程从ViewRoot的performTraversals开始，依次调用performMeasure、performLayout、performDraw。。</p>
+<p>DecorView有一个子元素LinearLayout，里面是titleBar和content,这两个都是FrameLayout。</p>
+<a id="more"></a>
+<h1 id="4-2-1">4.2.1</h1><p>MeasureSpec是一个32位int值，高2为表示SpecMode，低30位代表SpecSize。<br>SpecMode的三种类型：</p>
+<ol>
+<li>UNSPECIFIED<br>父容器不对View有任何限制，要多大给多大，一般用于系统内部表示测量状态。</li>
+<li>EXACTLY<br>父容器已经检测出View所需要的精确大小，view的大小就是SpecSize，对应于LayoutParams的match_parent和具体数值。</li>
+<li>AT_MOST<br>view的大小不能超过父容器指定的SpecSize，对应于wrap_content。</li>
+</ol>
+<h1 id="4-2-2">4.2.2</h1><p>LayoutParams需要和父容器一起才能决定View的MeasureSpec。<br>DecorView的MeasureSpec是由窗口的尺寸和LayoutParams决定。<br>当view采用固定宽高时，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并遵循Layoutparams中的大小。<br>当view采用wrap_content时，不管父容器的MeasureSpec是什么，View的MeasureSpec都是AT_MOST。<br>当view采用match_content时，当父容器是AT_MOST时，view也是AT_MOST。父容器是EXACTLY时，view也是EXACTLY。</p>
+<p>UNSPECIFIED主要用于系统内部多次Measure的情况，一般不需要关注。</p>
+<h1 id="4-3-1">4.3.1</h1><p>直接继承View的自定义控件需要重写onMeasure并设置wrap_content时的自身大小。否则就是父容器的剩余大小。<br>ViewGroup是一个抽象类，onMeasure由子类实现。</p>
+<p>getSuggestedMinimumWidth的逻辑：View如果没有背景，那么返回android:minWidth这个属性指定的值，这个值可以为0；如果设置了背景，则返回背景的最小宽度和minWidth中的较大值。<br>一个比较好的习惯是在onLayout方法中去获取View的测量宽高或最终宽高。</p>
+<p>获取view宽高的四种方法：</p>
+<ol>
+<li>Activity/View#onWindowFocusChanged<br>@Override<br>public void onWindowFocusChanged(boolean hasFocus) {<br> super.onWindowFocusChanged(hasFocus);<br> if (hasFocus) {<pre><code><span class="built_in">int</span> width = lv1.getMeasuredWidth<span class="literal">()</span>;
+<span class="type">Log</span>.d(<span class="type">TAG</span>, <span class="string">"test"</span> +width + <span class="string">" "</span>+lv1.getMeasuredHeight<span class="literal">()</span> );
+</code></pre> }<br>}</li>
+<li>view.post(runnable)</li>
+<li>ViewTreeObserver<br>当View树的状态发生改变或者内部view的可见性发生改变时，onGlobalLayout会被回调。</li>
+<li>view.measure(int widthMeasureSpec, int heightMeasureSpec)<br>第四种方法，view的measure需要根据viewLayoutParams来使用，<br>如果是具体数值<br>int widthSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);<br>int heightSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);<br>lv1.measure(widthSpec, heightSpec);<br>如果是wrap_content<br>int widthSpec = View.MeasureSpec.makeMeasureSpec((1&lt;&lt;30)-1, View.MeasureSpec.AT_MOST);<br>int heightSpec = View.MeasureSpec.makeMeasureSpec((1&lt;&lt;30)-1, View.MeasureSpec.AT_MOST);<br>lv1.measure(widthSpec, heightSpec);<br>match_parent无法算出，因为无法知道父容器的大小。<h1 id="4-3-2">4.3.2</h1>View的默认实现中，getWidth()和getMeasuredWidth()相等，只是赋值时机不同。<br>getWidth()是 mRight-mLeft，在layout中形成，另一个在measure中形成。<h1 id="4-3-3">4.3.3</h1>View有一个方法setWillNotDraw,设置后可以不绘制任何内容。ViewGroup默认开启，如果要绘制ViewGroup，要先关闭。<h1 id="4-4-2">4.4.2</h1></li>
+</ol>
+<ul>
+<li>如果继承view或ViewGroup，需要重写onMeasure支持wrap_content。</li>
+<li>考虑支持padding</li>
+<li>不要在view中使用Handler,有post方法。</li>
+<li>View中如果有线程或动画，要及时停止。参考View#onDetachedFromWindow,对应的是onAttachedToWindow。</li>
+</ul>
+<p>margin是由父容器控制的。<br>重写onMeasure使wrap_content生效。</p>
+<pre><code><span class="keyword">int</span> mSize = <span class="number">200</span>;
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>{
+    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    <span class="keyword">int</span> wMode = MeasureSpec.getMode(widthMeasureSpec);
+    <span class="keyword">int</span> wSize = MeasureSpec.getSize(widthMeasureSpec);
+    <span class="keyword">int</span> hMode = MeasureSpec.getMode(heightMeasureSpec);
+    <span class="keyword">int</span> hSize = MeasureSpec.getSize(heightMeasureSpec);
+    <span class="keyword">if</span> (wMode == MeasureSpec.AT_MOST &amp;&amp; hMode == MeasureSpec.AT_MOST) {
+        setMeasuredDimension(mSize, mSize);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(wMode == MeasureSpec.AT_MOST)</span> </span>{
+        setMeasuredDimension(mSize, hSize);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(hMode == MeasureSpec.AT_MOST)</span> </span>{
+        setMeasuredDimension(wSize, mSize);
+    }
+}
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="4-1">4.1</h1><p>ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时<br>会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。</p>
+<p>View的绘制流程从ViewRoot的performTraversals开始，依次调用performMeasure、performLayout、performDraw。。</p>
+<p>DecorView有一个子元素LinearLayout，里面是titleBar和content,这两个都是FrameLayout。</p>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android开发艺术探索读书笔记 第三章 view的事件体系]]></title>
+    <link href="http://seewhy93.github.io/2015/11/23/artsearchreadnote3/"/>
+    <id>http://seewhy93.github.io/2015/11/23/artsearchreadnote3/</id>
+    <published>2015-11-23T12:56:02.000Z</published>
+    <updated>2015-11-23T13:00:50.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="3-1-2_View的位置参数">3.1.2 View的位置参数</h1><p>x = left + translationX<br>y = top + translationY<br>在平移过程中,top和left表示原始左上角的位置信息，值不变。x,y,translationX和translationY改变。</p>
+<ul>
+<li>getX/getY返回相对于当前view左上角的坐标</li>
+<li>getRawX/getRawY返回相对于屏幕左上角的坐标</li>
+</ul>
+<h1 id="3-1-3">3.1.3</h1><p>TouchSlop是系统所能识别出的最小滑动距离，通过ViewConfiguration.get(getContext()).getScaledTouchSlop()获得</p>
+<a id="more"></a>
+<h1 id="3-1-4">3.1.4</h1><p>VelocityTracker用于获取当前滑动速度</p>
+<pre><code>VelocityTracker velocityTracker;
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>{
+    mGestureDetector.onTouchEvent(event);
+    <span class="keyword">int</span> action = event.getAction();
+    <span class="keyword">if</span> (velocityTracker == <span class="keyword">null</span>) {
+        velocityTracker = VelocityTracker.obtain();
+    }
+    velocityTracker.addMovement(event);
+    <span class="keyword">switch</span> (action) {
+        <span class="keyword">case</span> MotionEvent.ACTION_MOVE:
+            velocityTracker.computeCurrentVelocity(1000);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> MotionEvent.ACTION_UP:
+            <span class="keyword">int</span> xVel = (<span class="keyword">int</span>)velocityTracker.getXVelocity();
+            <span class="keyword">int</span> yVel = (<span class="keyword">int</span>)velocityTracker.getYVelocity();
+            Log.i(TAG, xVel + <span class="string">" "</span> + yVel);
+            velocityTracker.clear();
+            velocityTracker.recycle();
+            velocityTracker = <span class="keyword">null</span>;
+            <span class="keyword">break</span>;
+    }
+    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onTouchEvent</span><span class="params">(event)</span></span>;
+}
+</code></pre><p>public GestureDetector(OnGestureListener listener)已经是deprecated，需要用public GestureDetector(OnGestureListener listener, OnGestrureListener listener)代替<br>为了方便，可以直接使用下面的方式。SimpleOnGestureListener是实现OnGestrureListener 的内部静态类。<br>    mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {</p>
+<pre><code>    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onSingleTapConfirmed</span><span class="params">(MotionEvent e)</span> </span>{
+        <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onSingleTapConfirmed</span><span class="params">(e)</span></span>;
+    }
+});
+</code></pre><p>onSingleTapConfirmed严格的单击行为，后面不可能跟着另一个单击。<br>scrollTo(x, y)如果x ,y都为正数，则往左上角移动。只是内容移动，实际位置不变。<br>使用Scroller的方法:</p>
+<pre><code>@<span class="type">Override</span>
+public void computeScroll<span class="literal">()</span> {
+    <span class="keyword">if</span> (scroller.computeScrollOffset<span class="literal">()</span>) {
+        scrollTo(scroller.getCurrX<span class="literal">()</span>, scroller.getCurrY<span class="literal">()</span>);
+        postInvalidate<span class="literal">()</span>;
+    }
+}
+scroller.startScroll(scrollX, <span class="number">0</span>, delta, <span class="number">0</span>, <span class="number">1000</span>);
+</code></pre><p>使用动画平移：<br>myView.animate().translationX(100).setDuration(1000).start();<br>布局参数平移：</p>
+<pre><code>ViewGroup.MarginLayoutParams <span class="keyword">params</span> = (ViewGroup.MarginLayoutParams)myView.getLayoutParams();
+<span class="keyword">params</span>.width += <span class="number">100</span>;
+<span class="keyword">params</span>.leftMargin += <span class="number">100</span>;
+myView.requestLayout();
+进行拖动
+@<span class="function">Override
+<span class="keyword">public</span> boolean <span class="title">onTouchEvent</span><span class="params">(MotionEvent <span class="keyword">event</span>)</span> </span>{
+    <span class="keyword">int</span> x = (<span class="keyword">int</span>) <span class="keyword">event</span>.getRawX();
+    <span class="keyword">int</span> y = (<span class="keyword">int</span>) <span class="keyword">event</span>.getRawY();
+    <span class="keyword">switch</span> (<span class="keyword">event</span>.getAction()) {
+        <span class="keyword">case</span> MotionEvent.ACTION_MOVE:
+            <span class="keyword">int</span> dx = x - mLastX;
+            <span class="keyword">int</span> dy = y - mLaxtY;
+            animate().setDuration(<span class="number">0</span>).translationXBy(dx).translationYBy(dy).start();
+    }
+    mLastX = x;
+    mLaxtY = y;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+</code></pre><p> 还可以通过handler的sendEmptyMessageDelayed实现滑动</p>
+<h1 id="3-4_事件分发">3.4 事件分发</h1><pre><code>ViewGroup中dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent三者关系
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>{
+    <span class="keyword">boolean</span> consume = <span class="keyword">false</span>;
+    <span class="keyword">if</span> (onInterceptTouchEvent(ev)) {
+        consume = onTouchEvent(ev);
+    } <span class="keyword">else</span> {
+        consume = child.dispatchTouchEvent(ev);
+    }
+    <span class="keyword">return</span> consume;
+}
+</code></pre><h2 id="事件机制小结">事件机制小结</h2><ul>
+<li>如果OnTouchListener中onTouch返回True,则onTouchEvent不被调用。</li>
+<li>OnClickListener优先级最低</li>
+<li>一个事件序列指从down开始，经过&gt;=0个move,以up结束的一系列事件。</li>
+<li>正常情况下，一个事件序列只能被一个View拦截且消耗。特殊情况下可以将自己处理的事件通过调用onTouchEvent强行传给其他view。</li>
+<li>某个view一旦决定拦截，那么这个事件序列都只能由它处理。并且它的onInterceptTouchEvent不会再被调用。</li>
+<li>某个view一旦决定处理事件，如果它不消耗ACTION_DOWN事件，那么同一事件序列的其他事件都不会在交给它处理，并且事件将重新交给它的父元素去处理，即父元素的onTouchEvent会被调用。</li>
+<li>如果view不消耗除ACTION_DOWN以外的其他事件(只消耗ACTION_DOWN)，那么这个点击事件会消失，此时父元素的onTouchEvent并不会被调用，并且当前view可以持续收到后续的事件，最终这些消失的点击事件会传给Activity处理。</li>
+<li>ViewGroup默认不拦截任何事件。</li>
+<li>View没有onInterceptTouchEvent方法，一旦有事件传给它，它的onTouchEvent会被调用。</li>
+<li><p>View的onTouchEvent默认返回true,除非他是不可点击的。</p>
+<pre><code><span class="keyword">if</span> (((viewFlags <span class="subst">&amp;</span> CLICKABLE) <span class="subst">==</span> CLICKABLE <span class="subst">||</span>
+        (viewFlags <span class="subst">&amp;</span> LONG_CLICKABLE) <span class="subst">==</span> LONG_CLICKABLE) <span class="subst">||</span>
+        (viewFlags <span class="subst">&amp;</span> CONTEXT_CLICKABLE) <span class="subst">==</span> CONTEXT_CLICKABLE) {
+  <span class="attribute">...</span>
+  <span class="keyword">return</span> <span class="literal">true</span>;
+}
+</code></pre></li>
+<li><p>view的enable不影响onTouchEvent的返回值。</p>
+</li>
+<li>onClick会发生的前提是view是可点击的，并且收到了down和up事件。</li>
+<li>requestDisallowInterceptTouchEvent可以防止在父元素被拦截。除了ACTION_DOWN事件。因为ACTION_DOWN会重置状态。</li>
+<li>点击activity时，由activity的dispatchTouchEvent开始事件分发，调用抽象类Window的superDispatchTouchEvent方法。Window的唯一实现在PhoneWindow中。<br>PhoneWindow将superDispatchTouchEvent传给DecorView。</li>
+<li>setOnClickListener会自动将CLICKABLE设为true<h1 id="3-5-3解决滑动冲突的方式">3.5.3解决滑动冲突的方式</h1></li>
+</ul>
+<ol>
+<li>外部拦截法<br>不拦截ACTION_DWON，因为一旦拦截，后序事件都会由父容器处理。<br>不拦截ACTION_UP，如果拦截，会导致子元素onClick无法触发。<br>然后根据需求判断是否拦截ACTION_MOVE。</li>
+<li>内部拦截法<br>父容器不拦截任何事件。<br>子元素调用getParent().requestDisallowInterceptTouchEvent(true);来改变拦截规则</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="3-1-2_View的位置参数">3.1.2 View的位置参数</h1><p>x = left + translationX<br>y = top + translationY<br>在平移过程中,top和left表示原始左上角的位置信息，值不变。x,y,translationX和translationY改变。</p>
+<ul>
+<li>getX/getY返回相对于当前view左上角的坐标</li>
+<li>getRawX/getRawY返回相对于屏幕左上角的坐标</li>
+</ul>
+<h1 id="3-1-3">3.1.3</h1><p>TouchSlop是系统所能识别出的最小滑动距离，通过ViewConfiguration.get(getContext()).getScaledTouchSlop()获得</p>]]>
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[《Android开发艺术探索》读书笔记 第二章  IPC机制]]></title>
