@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AndFix使用介绍 | 闲池阁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍AndFix，全称是Android hot-fix。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。
+使用方式
+首先添加依赖compile &amp;#39;com.alipay.euler:andfix:0.3.1@aar&amp;#39;
+然后在Application.onCreate() 中添加以下代码123patch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AndFix使用介绍">
+<meta property="og:url" content="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/index.html">
+<meta property="og:site_name" content="闲池阁">
+<meta property="og:description" content="介绍AndFix，全称是Android hot-fix。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。
+使用方式
+首先添加依赖compile &amp;#39;com.alipay.euler:andfix:0.3.1@aar&amp;#39;
+然后在Application.onCreate() 中添加以下代码123patch">
+<meta property="og:updated_time" content="2015-12-14T16:43:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AndFix使用介绍">
+<meta name="twitter:description" content="介绍AndFix，全称是Android hot-fix。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。
+使用方式
+首先添加依赖compile &amp;#39;com.alipay.euler:andfix:0.3.1@aar&amp;#39;
+然后在Application.onCreate() 中添加以下代码123patch">
+  
+    <link rel="alternative" href="/atom.xml" title="闲池阁" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?56e8514e9ecf50490a45089bcf2fc5af";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xiw1r.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">seewhy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/seewhy93" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/2845124092" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/seewhy" title="zhihu">zhihu</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/热补丁/" style="font-size: 10px;">热补丁</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">hello seewhy</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">seewhy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xiw1r.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">seewhy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/seewhy93" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/2845124092" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/seewhy" title="zhihu">zhihu</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-AndFixIntroduce" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/15/AndFixIntroduce/" class="article-date">
+  	<time datetime="2015-12-14T16:41:51.000Z" itemprop="datePublished">2015-12-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AndFix使用介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热补丁/">热补丁</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
+<h1 id="使用方式">使用方式</h1><ol>
+<li>首先添加依赖<br><code>compile &#39;com.alipay.euler:andfix:0.3.1@aar&#39;</code></li>
+<li>然后在Application.onCreate() 中添加以下代码<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patchManager = new PatchManager(context)<span class="comment">;</span></span><br><span class="line">patchManager.init(appversion)<span class="comment">;//current version</span></span><br><span class="line">patchManager.loadPatch()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以用这句话获取appversion<br><code>String appversion= getPackageManager().getPackageInfo(getPackageName(), 0).versionName;</code><br>注意每次appversion变更都会导致所有补丁被删除,如果appversion没有改变，则会加载已经保存的所有补丁。</p>
+<a id="more"></a>
+<ol>
+<li><p>然后在需要的地方调用PatchManager的addPatch方法加载新补丁，比如可以在下载补丁文件之后调用。</p>
+</li>
+<li><p>之后就是打补丁的过程了，首先生成一个apk文件，然后更改代码，在修复bug后生成另一个apk。<br>通过官方提供的工具<a href="https://github.com/alibaba/AndFix/raw/master/tools/apkpatch-1.0.3.zip" target="_blank" rel="external">apkpatch</a><br>生成一个.apatch格式的补丁文件，需要提供原apk，修复后的apk，以及一个签名文件。<br>可以直接使用命令apkpatch查看具体的使用方法。<br>使用示例：<br><code>apkpatch -o D:/Patch/ -k debug.keystore -p android-a androiddebugkey -e android f bug-fix.apk t release.apk</code></p>
+</li>
+<li><p>通过网络传输或者adb push的方式将apatch文件传到手机上，然后运行到addPatch的时候就会加载补丁。<br>加载过的补丁会被保存到data/packagename/files/apatch_opt目录下，所以下载过来的补丁用过一次就可以删除了。</p>
+</li>
+</ol>
+<h1 id="大致原理">大致原理</h1><p>apkpatch将两个apk做一次对比，然后找出不同的部分。可以看到生成的apatch了文件，后缀改成zip再解压开，里面有一个dex文件。通过jadx查看一下源码，里面就是被修复的代码所在的类文件,这些更改过的类都加上了一个_CF的后缀，并且变动的方法都被加上了一个叫@MethodReplace的annotation，通过clazz和method指定了需要替换的方法。<br>然后客户端sdk得到补丁文件后就会根据annotation来寻找需要替换的方法。最后由JNI层完成方法的替换。</p>
+<h1 id="多次打补丁">多次打补丁</h1><p>如果本地保存了多个补丁，那么AndFix会按照补丁生成的时间顺序加载补丁。具体是根据.apatch文件中的PATCH.MF的字段Created-Time。</p>
+<h1 id="安全性">安全性</h1><p>readme提示开发者需要验证下载过来的apatch文件的签名是否就是在使用apkpatch工具时使用的签名，如果不验证那么任何人都可以制作自己的apatch文件来对你的APP进行修改。<br>但是我看到AndFix已经做了验证，如果补丁文件的证书和当前apk的证书不是同一个的话，就不能加载补丁。<br>官网还有一条，提示需要验证optimize file的指纹，应该是为了防止有人替换掉本地保存的补丁文件，所以要验证MD5码，然而SecurityChecker类里面也已经做了这个工作。。但是这个MD5码是保存在sharedpreference里面，如果手机已经root那么还是可以被访问的。</p>
+<h1 id="混淆">混淆</h1><p><code>-printmapping proguard.map</code><br>首先需要生成mapping文件记录混淆规则，之后可以把printmapping 这句话注释掉，每次只使用applymapping。<br><code>-applymapping proguard.map</code><br>然后在下面加上<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">*</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">annotation</span>.<span class="title">Annotation</span></span><br><span class="line"></span>-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> <span class="title">*</span> &#123;</span></span><br><span class="line">    native &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">alipay</span>.<span class="title">euler</span>.<span class="title">andfix</span>.<span class="title">**</span> &#123;</span> *; &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="碰到的问题">碰到的问题</h1><p>刚开始做的demo中，每次产生的apatch文件用的名字都是相同的，结果导致只有第一次的补丁能生效。<br>看了源码后发现只有每次名字不同才能加载，log中应该也有提示，但是没注意到。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">File</span> src = <span class="keyword">new</span> <span class="keyword">File</span>(path);</span><br><span class="line"><span class="keyword">File</span> dest = <span class="keyword">new</span> <span class="keyword">File</span>(mPatchDir, src.getName());</span><br><span class="line"><span class="keyword">if</span>(!src.exists())&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> FileNotFoundException(path);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (dest.exists()) &#123;</span><br><span class="line">	Log.d(TAG, <span class="string">"patch ["</span> + path + <span class="string">"] has be loaded."</span>);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="局限性">局限性</h1><ul>
+<li>不支持YunOS</li>
+<li>无法添加新类和新的字段</li>
+<li>需要使用加固前的apk制作补丁，但是补丁文件很容易被反编译，也就是修改过的类源码容易泄露。</li>
+<li>使用加固平台可能会使热补丁功能失效（看到有人在360加固提了这个问题，自己还未验证）。</li>
+</ul>
+<h1 id="与Nuwa对比">与Nuwa对比</h1><p>Nuwa是另一个热补丁框架，原理是基于QQ空间团队提出的<a href="http://zhuanlan.zhihu.com/magilu/20308548" target="_blank" rel="external">安卓App热补丁动态修复技术介绍</a>。<br>与Nuwa相比，AndFix有一下优点：</p>
+<ul>
+<li>不需要重启APP即可应用补丁。</li>
+<li>安全性更好，Nuwa后面的版本应该也会加上安全方面的内容。</li>
+</ul>
+<p>但是也有缺点</p>
+<ul>
+<li>无法添加类和字段</li>
+</ul>
+<h1 id="参考">参考</h1><p><a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">官方readme文档</a><br><a href="http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/" target="_blank" rel="external">各大热补丁方案分析和比较</a><br><a href="http://blog.csdn.net/qxs965266509/article/details/49816007" target="_blank" rel="external">Alibaba-AndFix Bug热修复框架原理及源码解析</a><br><a href="http://yunair.github.io/blog/2015/09/25/AndFix-%E8%A7%A3%E6%9E%90(%E4%B8%80" target="_blank" rel="external">AndFix解析</a>.html)</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/23/artsearchreadnote4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android开发艺术探索读书笔记 第四章 view的工作原理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="AndFixIntroduce" data-title="AndFix使用介绍" data-url="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"seewhy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 seewhy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
