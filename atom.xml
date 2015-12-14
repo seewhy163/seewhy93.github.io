@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-12-14T16:43:05.000Z</updated>
+  <updated>2015-12-14T16:45:34.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/"/>
     <id>http://seewhy93.github.io/2015/12/15/AndFixIntroduce/</id>
     <published>2015-12-14T16:41:51.000Z</published>
-    <updated>2015-12-14T16:43:05.000Z</updated>
+    <updated>2015-12-14T16:45:34.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
 <h1 id="使用方式">使用方式</h1><ol>
 <li>首先添加依赖<br><code>compile &#39;com.alipay.euler:andfix:0.3.1@aar&#39;</code></li>
@@ -31,7 +31,7 @@
 <ol>
 <li><p>然后在需要的地方调用PatchManager的addPatch方法加载新补丁，比如可以在下载补丁文件之后调用。</p>
 </li>
-<li><p>之后就是打补丁的过程了，首先生成一个apk文件，然后更改代码，在修复bug后生成另一个apk。<br>通过官方提供的工具<a href="https://github.com/alibaba/AndFix/raw/master/tools/apkpatch-1.0.3.zip" target="_blank" rel="external">apkpatch</a><br>生成一个.apatch格式的补丁文件，需要提供原apk，修复后的apk，以及一个签名文件。<br>可以直接使用命令apkpatch查看具体的使用方法。<br>使用示例：<br><code>apkpatch -o D:/Patch/ -k debug.keystore -p android-a androiddebugkey -e android f bug-fix.apk t release.apk</code></p>
+<li><p>之后就是打补丁的过程了，首先生成一个apk文件，然后更改代码，在修复bug后生成另一个apk。<br>通过官方提供的工具<a href="https://github.com/alibaba/AndFix/raw/master/tools/apkpatch-1.0.3.zip" target="_blank" rel="external">apkpatch</a><br>生成一个.apatch格式的补丁文件，需要提供原apk，修复后的apk，以及一个签名文件。<br>可以直接使用命令apkpatch查看具体的使用方法。<br>使用示例：<br><code>apkpatch -o D:/Patch/ -k debug.keystore -p android-a androiddebugkey -e android -f bug-fix.apk -t release.apk</code></p>
 </li>
 <li><p>通过网络传输或者adb push的方式将apatch文件传到手机上，然后运行到addPatch的时候就会加载补丁。<br>加载过的补丁会被保存到data/packagename/files/apatch_opt目录下，所以下载过来的补丁用过一次就可以删除了。</p>
 </li>
