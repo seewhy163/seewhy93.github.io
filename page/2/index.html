@@ -186,6 +186,164 @@ var _hmt = _hmt || [];
 </nav>
       <div class="body-wrap">
   
+    <article id="post-artsearchreadnote2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/17/artsearchreadnote2/" class="article-date">
+  	<time datetime="2015-11-17T14:37:48.000Z" itemprop="datePublished">2015-11-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/17/artsearchreadnote2/">《Android开发艺术探索》读书笔记 第二章  IPC机制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2-2-1">2.2.1</h1><ul>
+<li><p>使用多进程可以在AndroidManifest中通过设置android:process属性，或者在jni中fork一个进程<br>进程名 :remote :的含义是指在前面附加包名，并且属于私有进程。其他应用的组件不能和它在同一个进程。<br>不以:开头的进程可以通过SharedUID跑在同一个进程，但是要求两个应用签名相同。同一进程可以相互访问私有数据。</p>
+</li>
+<li><p>adb shell ps| grep xxx  获取包含字符串的进程</p>
+</li>
+</ul>
+<h1 id="2-2-2">2.2.2</h1><p>多进程带来的问题</p>
+<ol>
+<li>静态成员和单例模式失效</li>
+<li>线程同步机制失效</li>
+<li>SharedPreference可靠性下降(sp不支持两个进程同时读写)</li>
+<li>Application会创建多次</li>
+</ol>
+<p>跨进程通信的方式</p>
+<ul>
+<li>intent</li>
+<li>共享文件和sharedPreference</li>
+<li>基于Binder的Messenger和AIDL</li>
+<li>Socket</li>
+<li>ContentProvider</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/17/artsearchreadnote2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-artsearchreadnote1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/17/artsearchreadnote1/" class="article-date">
+  	<time datetime="2015-11-17T13:38:42.000Z" itemprop="datePublished">2015-11-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/17/artsearchreadnote1/">《Android开发艺术探索》读书笔记 第一章 生命周期与启动模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
+<h1 id="1-1-1_典型情况生命周期分析">1.1.1 典型情况生命周期分析</h1><ul>
+<li><p>onStart、onResume与onPause、onStop有什么实质不同？<br>onStart、onStop是从是否可见来描述，onResume和onPause是从是否可与用户交互的角度。</p>
+</li>
+<li><p>在启动新activity时，先执行旧activity的onPause，然后再是新activiy的onCreate,onStart,onResume。</p>
+</li>
+<li><p>如果新的activity是透明的，那么原activity不会执行onStop。（没有变成不可见）</p>
+</li>
+<li><p>设置activity透明的方法</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowBackground"</span>&gt;@android:color/transparent&lt;/<span class="property">item</span>&gt;
+</code></pre></li>
+</ul>
+<h1 id="1-1-2_异常情况生命周期">1.1.2 异常情况生命周期</h1><ul>
+<li><p>系统在activity异常终止的时候会调用onSaveInstanceState存储数据，onRestoreInstanceState恢复数据。</p>
+</li>
+<li><p>按Home或启动新activity也会触发onSaveInstanceState。</p>
+</li>
+<li><p>内存不足时杀死进程会触发onSaveInstanceState、onRestoreInstanceState</p>
+</li>
+<li><p>转屏时触发onSaveInstanceState,如果要转屏时不触发，需要设置android:configChanges=”orientation”<br>如果是api&gt;=13,需设置android:configChanges=”orientation|screenSize”，<br>设置后转屏时回调 onConfigurationChanged</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/17/artsearchreadnote1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-stethoIntroduce" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -383,132 +541,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-xiangweninterview" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/15/xiangweninterview/" class="article-date">
-  	<time datetime="2015-07-15T12:13:40.000Z" itemprop="datePublished">2015-07-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/15/xiangweninterview/">象文面试总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天接到一个电话，说是在网上看到我的简历，问要不要去面试。<br>上一次面试是阿里的，结果惨败。于是想见识一些普通公司的面试，就答应了。<br>然后就定在今天下午。</p>
-<p>提前一天下了他们公司的app，是做动态壁纸的，效果做的很酷炫。<br>这里应该能想到面试会问动画的问题，但是完全没有准备。结果今天问到动画就说不会。</p>
-<p>下午两点多来到公司，然后填了一张表格就开始面试了。</p>
-<p>一面比较随意，面试官感觉就比我大几岁。</p>
-<p>下面是大致对话内容<br>“你的字写得好难看”</p>
-<p>“嗯，是的”</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/15/xiangweninterview/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-fragment解析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/09/fragment解析/" class="article-date">
-  	<time datetime="2015-05-09T01:26:04.000Z" itemprop="datePublished">2015-05-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/09/fragment解析/">Android fragment</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
-<p>通过fragment可以方便的实现在多个activity中实现相同的布局。在做android平板开发时，可以和手机程序共用同一段代码。</p>
-<p>如果需要在界面中动态添加、替换、删除某一块模块，也可以通过fragment实现。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fragment/">fragment</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/05/09/fragment解析/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

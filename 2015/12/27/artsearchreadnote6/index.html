@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开发艺术探索读书笔记 第六章 Android的Drawable | 闲池阁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Drawable表示可以在Canvas上进行绘制的抽象的概念。
+非图片类型Drawable占用空间小，可以减少apk大小。
+BitmapDrawable表示一张图片，对应xml标签
+NinePatchDrawable，表示一张.9图，,在bitmap标签中也可以使用.9图。
+ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。
+LayerDrawable表示层次化的drawable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索读书笔记 第六章 Android的Drawable">
+<meta property="og:url" content="http://seewhy93.github.io/2015/12/27/artsearchreadnote6/index.html">
+<meta property="og:site_name" content="闲池阁">
+<meta property="og:description" content="Drawable表示可以在Canvas上进行绘制的抽象的概念。
+非图片类型Drawable占用空间小，可以减少apk大小。
+BitmapDrawable表示一张图片，对应xml标签
+NinePatchDrawable，表示一张.9图，,在bitmap标签中也可以使用.9图。
+ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。
+LayerDrawable表示层次化的drawable">
+<meta property="og:updated_time" content="2015-12-27T14:10:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索读书笔记 第六章 Android的Drawable">
+<meta name="twitter:description" content="Drawable表示可以在Canvas上进行绘制的抽象的概念。
+非图片类型Drawable占用空间小，可以减少apk大小。
+BitmapDrawable表示一张图片，对应xml标签
+NinePatchDrawable，表示一张.9图，,在bitmap标签中也可以使用.9图。
+ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。
+LayerDrawable表示层次化的drawable">
+  
+    <link rel="alternative" href="/atom.xml" title="闲池阁" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "//hm.baidu.com/hm.js?56e8514e9ecf50490a45089bcf2fc5af";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xiw1r.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">seewhy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/seewhy93" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/2845124092" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/seewhy" title="zhihu">zhihu</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/fragment/" style="font-size: 10px;">fragment</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/热补丁/" style="font-size: 10px;">热补丁</a> <a href="/tags/读书笔记/" style="font-size: 20px;">读书笔记</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">hello seewhy</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">seewhy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xiw1r.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">seewhy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/seewhy93" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/2845124092" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/seewhy" title="zhihu">zhihu</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-artsearchreadnote6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/27/artsearchreadnote6/" class="article-date">
+  	<time datetime="2015-12-27T14:07:03.000Z" itemprop="datePublished">2015-12-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开发艺术探索读书笔记 第六章 Android的Drawable
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Drawable表示可以在Canvas上进行绘制的抽象的概念。</p>
+<p>非图片类型Drawable占用空间小，可以减少apk大小。</p>
+<p>BitmapDrawable表示一张图片，对应xml标签<bitmap></bitmap></p>
+<p>NinePatchDrawable，表示一张.9图，<nine-patch>,在bitmap标签中也可以使用.9图。</nine-patch></p>
+<p>ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。<shape></shape></p>
+<p>LayerDrawable表示层次化的drawable集合，下面的item会覆盖上面的item。<layer-list></layer-list></p>
+<a id="more"></a>
+<p>StateListDrawable对应<selector>,可以根据view的状态自动选择drawable。</selector></p>
+<p>LevelListDrawable，对应<level-list>, item有maxLevel和minLevel属性，可以通过drawable的setLevel切换drawable。范围是0~10000。</level-list></p>
+<p>TransitionDrawable，对应<transition>，用于实现两个Drawable之间的淡入淡出效果。</transition></p>
+<p>如果我想在ImageView显示图片的时候有个渐变的动画效果，那么你可能会想到使用animation动画来实现，但这这种方式看起来不会自然，因为在调用statAnimation的时候因为图片已经显示了，这样再硬生生的播放一次动画其实会导致细微的闪烁效果。</p>
+<p>使用TransitionDrawable可以完美解决这个问题。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">final TransitionDrawable td = <span class="keyword">new</span> TransitionDrawable(<span class="keyword">new</span> Drawable[] &#123; <span class="keyword">new</span> ColorDrawable(<span class="number">0xfffcfcfc</span>),</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> BitmapDrawable(mContext.getResources(), bitmap) &#125;);</span><br><span class="line"></span><br><span class="line">imageView.setImageDrawable(td);</span><br><span class="line"></span><br><span class="line">td.startTransition(<span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+<p>其中300是渐变持续的时间，TransitionDrawable的第一个参数是渐变开始时的图像，第二个参数是最终要显示的图像。</p>
+<p>也可以将TransitionDrawable用xml表示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">transition</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/image_expand"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/image_collapse"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Resources res = getResources()<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    TransitionDrawable transition = (TransitionDrawable)res.getDrawable(R.drawable.expand_collapse)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    ImageView image = (ImageView) findViewById(R.id.toggle_image)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    image.setImageDrawable(transition)<span class="comment">;        </span></span><br><span class="line"></span><br><span class="line">    transition.startTransition(1000)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>InsetDrawable对应<inset>,可以将其他drawable内嵌到自己当中。</inset></p>
+<p>ScaleDrawable可以根据level将指定的drawable缩放到一定比例。<scale></scale></p>
+<p>ClipDrawable可以根据自己当前level裁剪另一个drawable。<clip></clip></p>
+<p>其他：</p>
+<p>AnimationDrawable可以播放帧动画<animation-list>，ColorDrawable代表单色</animation-list></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/18/artsearchreadnote5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android开发艺术探索读书笔记 第五章 理解remoteViews</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="artsearchreadnote6" data-title="Android开发艺术探索读书笔记 第六章 Android的Drawable" data-url="http://seewhy93.github.io/2015/12/27/artsearchreadnote6/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"seewhy"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 seewhy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

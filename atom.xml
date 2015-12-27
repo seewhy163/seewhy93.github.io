@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-12-14T16:45:34.000Z</updated>
+  <updated>2015-12-27T14:10:42.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -15,11 +15,81 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Android开发艺术探索读书笔记 第六章 Android的Drawable]]></title>
+    <link href="http://seewhy93.github.io/2015/12/27/artsearchreadnote6/"/>
+    <id>http://seewhy93.github.io/2015/12/27/artsearchreadnote6/</id>
+    <published>2015-12-27T14:07:03.000Z</published>
+    <updated>2015-12-27T14:10:42.000Z</updated>
+    <content type="html"><![CDATA[<p>Drawable表示可以在Canvas上进行绘制的抽象的概念。</p>
+<p>非图片类型Drawable占用空间小，可以减少apk大小。</p>
+<p>BitmapDrawable表示一张图片，对应xml标签<bitmap></bitmap></p>
+<p>NinePatchDrawable，表示一张.9图，<nine-patch>,在bitmap标签中也可以使用.9图。</nine-patch></p>
+<p>ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。<shape></shape></p>
+<p>LayerDrawable表示层次化的drawable集合，下面的item会覆盖上面的item。<layer-list></layer-list></p>
+<a id="more"></a>
+<p>StateListDrawable对应<selector>,可以根据view的状态自动选择drawable。</selector></p>
+<p>LevelListDrawable，对应<level-list>, item有maxLevel和minLevel属性，可以通过drawable的setLevel切换drawable。范围是0~10000。</level-list></p>
+<p>TransitionDrawable，对应<transition>，用于实现两个Drawable之间的淡入淡出效果。</transition></p>
+<p>如果我想在ImageView显示图片的时候有个渐变的动画效果，那么你可能会想到使用animation动画来实现，但这这种方式看起来不会自然，因为在调用statAnimation的时候因为图片已经显示了，这样再硬生生的播放一次动画其实会导致细微的闪烁效果。</p>
+<p>使用TransitionDrawable可以完美解决这个问题。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">final TransitionDrawable td = <span class="keyword">new</span> TransitionDrawable(<span class="keyword">new</span> Drawable[] &#123; <span class="keyword">new</span> ColorDrawable(<span class="number">0xfffcfcfc</span>),</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> BitmapDrawable(mContext.getResources(), bitmap) &#125;);</span><br><span class="line"></span><br><span class="line">imageView.setImageDrawable(td);</span><br><span class="line"></span><br><span class="line">td.startTransition(<span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+<p>其中300是渐变持续的时间，TransitionDrawable的第一个参数是渐变开始时的图像，第二个参数是最终要显示的图像。</p>
+<p>也可以将TransitionDrawable用xml表示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">transition</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/image_expand"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/image_collapse"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Resources res = getResources()<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    TransitionDrawable transition = (TransitionDrawable)res.getDrawable(R.drawable.expand_collapse)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    ImageView image = (ImageView) findViewById(R.id.toggle_image)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    image.setImageDrawable(transition)<span class="comment">;        </span></span><br><span class="line"></span><br><span class="line">    transition.startTransition(1000)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>InsetDrawable对应<inset>,可以将其他drawable内嵌到自己当中。</inset></p>
+<p>ScaleDrawable可以根据level将指定的drawable缩放到一定比例。<scale></scale></p>
+<p>ClipDrawable可以根据自己当前level裁剪另一个drawable。<clip></clip></p>
+<p>其他：</p>
+<p>AnimationDrawable可以播放帧动画<animation-list>，ColorDrawable代表单色</animation-list></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Drawable表示可以在Canvas上进行绘制的抽象的概念。</p>
+<p>非图片类型Drawable占用空间小，可以减少apk大小。</p>
+<p>BitmapDrawable表示一张图片，对应xml标签<bitmap></p>
+<p>NinePatchDrawable，表示一张.9图，<nine-patch>,在bitmap标签中也可以使用.9图。</p>
+<p>ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。<shape></p>
+<p>LayerDrawable表示层次化的drawable集合，下面的item会覆盖上面的item。<layer-list></p>]]>
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Android开发艺术探索读书笔记 第五章 理解remoteViews]]></title>
+    <link href="http://seewhy93.github.io/2015/12/18/artsearchreadnote5/"/>
+    <id>http://seewhy93.github.io/2015/12/18/artsearchreadnote5/</id>
+    <published>2015-12-18T13:35:53.000Z</published>
+    <updated>2015-12-27T14:10:57.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="5-1-1">5.1.1</h1><p>RemoteViews用于自定义Notification。<br>PendingIntent表示待定Intent，包含的意图由用户触发。</p>
+<h1 id="5-1-3">5.1.3</h1><p>PendingIntent支持三种待定意图：启动Activity，启动Service和发送广播。<br>getActivity(Context context,int requestCode, Intent intent, int flags)<br>如果两个PendingIntent内部的Intent相同并且requestCode也相同，那么这两个PendingIntent是相同的。</p>
+<a id="more"></a>
+<p>如果两个Intent的CompontName和inter-filter都相同，那么这两个Intent就是相同的。</p>
+<p>Flags的类型：<br>    FLAG_ONE_SHOT：得到的pi只能使用一次，第二次使用该pi时报错<br>    FLAG_NO_CREATE： 当pi不存在时，不创建，返回null<br>    FLAG_CANCEL_CURRENT： 每次都创建一个新的pi<br>    FLAG_UPDATE_CURRENT： 不存在时就创建，创建好了以后就一直用它，每次使用时都会更新pi的数据(使用较多)  </p>
+<p>如果notify方法的id是不改变，那么不管PendingIntent是否匹配，后面的通知都会直接替换前面的通知。<br>如果id改变，然后pi不匹配（requestCode与Intent相同称为匹配），那么这些通知之间不会相互干扰。</p>
+<p>如果id改变并且pi匹配，根据pi的flag类型</p>
+<h1 id="5-2">5.2</h1><p>RemoteViews构造函数：<br>public RemoteViews(String packageName,int layoutId)</p>
+<p>RemoteView会通过Binder传递到SystemServer进程，因为RemoteViews实现了Parcelable接口，可以跨进程传输。<br>remoteViews内部记录提交的set方法，等到remoteviews被加载以后才执行。这样remoteview就可以在SystemServer进程中显示了。<br>每调用一次set操作，remoteviews中添加一个action。<br>当通过NotificationManager和AppWidgetManager来 提交更新时，这些Action会传到远程进程并执行。</p>
+<p>setOnClickPendingIntent不能给ListView和StackView中的View设置单击事件，需要使用setPendingIntentTemplate和setOnClickFillInIntent组合。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="5-1-1">5.1.1</h1><p>RemoteViews用于自定义Notification。<br>PendingIntent表示待定Intent，包含的意图由用户触发。</p>
+<h1 id="5-1-3">5.1.3</h1><p>PendingIntent支持三种待定意图：启动Activity，启动Service和发送广播。<br>getActivity(Context context,int requestCode, Intent intent, int flags)<br>如果两个PendingIntent内部的Intent相同并且requestCode也相同，那么这两个PendingIntent是相同的。</p>]]>
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[AndFix使用介绍]]></title>
     <link href="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/"/>
     <id>http://seewhy93.github.io/2015/12/15/AndFixIntroduce/</id>
     <published>2015-12-14T16:41:51.000Z</published>
-    <updated>2015-12-14T16:45:34.000Z</updated>
+    <updated>2015-12-14T16:46:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
 <h1 id="使用方式">使用方式</h1><ol>
 <li>首先添加依赖<br><code>compile &#39;com.alipay.euler:andfix:0.3.1@aar&#39;</code></li>
