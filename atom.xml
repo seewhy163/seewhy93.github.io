@@ -89,7 +89,7 @@
     <link href="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/"/>
     <id>http://seewhy93.github.io/2015/12/15/AndFixIntroduce/</id>
     <published>2015-12-14T16:41:51.000Z</published>
-    <updated>2015-12-14T16:46:48.000Z</updated>
+    <updated>2015-12-27T14:14:25.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
 <h1 id="使用方式">使用方式</h1><ol>
 <li>首先添加依赖<br><code>compile &#39;com.alipay.euler:andfix:0.3.1@aar&#39;</code></li>
@@ -116,10 +116,12 @@
 <li>无法添加新类和新的字段</li>
 <li>需要使用加固前的apk制作补丁，但是补丁文件很容易被反编译，也就是修改过的类源码容易泄露。</li>
 <li>使用加固平台可能会使热补丁功能失效（看到有人在360加固提了这个问题，自己还未验证）。</li>
-</ul>
+<li>经过测试，如果在5.0系统的ART模式下，无法对通过连续打补丁的方式对通过一个方法进行修改，而4.4 的dalvik模式则没有这个问题。</li>
+<li><p>Android 4.4的ART模式中无法使用补丁功能</p>
 <h1 id="与Nuwa对比">与Nuwa对比</h1><p>Nuwa是另一个热补丁框架，原理是基于QQ空间团队提出的<a href="http://zhuanlan.zhihu.com/magilu/20308548" target="_blank" rel="external">安卓App热补丁动态修复技术介绍</a>。<br>与Nuwa相比，AndFix有一下优点：</p>
-<ul>
-<li>不需要重启APP即可应用补丁。</li>
+</li>
+<li><p>不需要重启APP即可应用补丁。</p>
+</li>
 <li>安全性更好，Nuwa后面的版本应该也会加上安全方面的内容。</li>
 </ul>
 <p>但是也有缺点</p>
