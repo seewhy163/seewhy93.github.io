@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2016-02-15T15:32:47.000Z</updated>
+  <updated>2016-02-15T15:44:23.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[artsearchreadnote8]]></title>
+    <title><![CDATA[Android开发艺术探索读书笔记 第七章 Android动画深入分析]]></title>
     <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote7/"/>
     <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote7/</id>
     <published>2016-01-03T11:56:37.000Z</published>
-    <updated>2016-02-15T15:32:47.000Z</updated>
+    <updated>2016-02-15T15:44:23.000Z</updated>
     <content type="html"><![CDATA[<h1 id="7-1_view动画">7.1 view动画</h1><p>View动画，有4种，平移、选择、缩放、透明度动画。</p>
 <p>可以通过接口AnimationListener监听动画。</p>
 <h2 id="7-1-2_自定义动画">7.1.2 自定义动画</h2><p>继承Animation抽象类，重写initalize和applyTransformation方法。</p>
@@ -90,14 +90,16 @@
     
     </summary>
     
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
   </entry>
   
   <entry>
-    <title><![CDATA[artsearchreadnote8]]></title>
+    <title><![CDATA[Android开发艺术探索读书笔记 第八章 理解Window和WindowManager]]></title>
     <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote8/"/>
     <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote8/</id>
     <published>2016-01-03T11:56:37.000Z</published>
-    <updated>2016-02-15T15:34:04.000Z</updated>
+    <updated>2016-02-15T15:45:03.000Z</updated>
     <content type="html"><![CDATA[<p>Window是一个抽象类，具体实现是PhoneWindow。</p>
 <h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>
 <a id="more"></a>
@@ -125,6 +127,8 @@
 <h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>]]>
     
     </summary>
+    
+      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
