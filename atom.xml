@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2015-12-27T14:10:42.000Z</updated>
+  <updated>2016-01-03T11:56:37.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -13,6 +13,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[artsearchreadnote8]]></title>
+    <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote8/"/>
+    <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote8/</id>
+    <published>2016-01-03T11:56:37.000Z</published>
+    <updated>2016-01-03T11:56:37.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[在Mac 10.11中编译Android 6.0源码]]></title>
+    <link href="http://seewhy93.github.io/2016/01/01/aospcompilation/"/>
+    <id>http://seewhy93.github.io/2016/01/01/aospcompilation/</id>
+    <published>2016-01-01T14:09:01.000Z</published>
+    <updated>2016-01-01T18:38:37.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>前几天心血来潮想编译Android源码，总共花了大概三天的时间，碰到一些问题，记录一下防止以后忘掉。</p>
+<h1 id="本地环境">本地环境</h1><p>系统版本： OS X 10.11.2<br>git : 2.6.4<br>port :2.3.4<br>make : 3.81<br>curl : 7.46.0</p>
+<h1 id="环境配置">环境配置</h1><p>首先需要一个区分大小写的硬盘,至少要100G，我是在一个移动硬盘上编译，所以直接磁盘工具-&gt;选择硬盘-&gt;抹掉,格式选择第二个”OS X扩展（区分大小写，日志式）”就可以了。</p>
+<a id="more"></a>
+<p>如果不想新建一个分区，也可以通过官网提供的方式，执行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdiutil <span class="operator"><span class="keyword">create</span> -<span class="keyword">type</span> <span class="keyword">SPARSE</span> -fs <span class="string">'Case-sensitive Journaled HFS+'</span> -<span class="keyword">size</span> <span class="number">100</span><span class="keyword">g</span> ~/android.dmg</span><br><span class="line">hdiutil attach ~/android.dmg -mountpoint /Volumes/android;</span></span><br></pre></td></tr></table></figure></p>
+<p>来创建并挂载一个dmg文件来使用。</p>
+<p>然后需要装一下java7环境，去下载一下就好了<a href="http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html#jdk-7u71-oth-JPR" target="_blank" rel="external">jdk-7u71-macosx-x64.dmg</a>，一般做Android开发的都已经装过了。</p>
+<p>接下来需要安装macports，它会替你装好编译过程中需要的各种工具。<br>直接到<a href="http://www.macports.org/install.php" target="_blank" rel="external">官网</a>下载最新版本的，装好后，再将路径 <code>/opt/local/bin</code> 添加到环境变量，并且要在 <code>/usr/bin</code> 的前面。<br>接着执行<code>POSIXLY_CORRECT=1 sudo port install gmake libsdl git gnupg</code>开始下载。</p>
+<p>然后执行 <code>make -v</code>查看当前make的版本，如果是3.82的话，还需要回退到3.81。因为3.82有个bug所以不能用来编译。不过我装完一直都是3.81，所以无所谓了，回退的具体方法可以去看官方文档。</p>
+<h1 id="下载镜像">下载镜像</h1><p>我用的是清华的<a href="http://mirrors.tuna.tsinghua.edu.cn/help/#AOSP" target="_blank" rel="external">AOSP镜像</a>，根据提示</p>
+<blockquote>
+<p>由于首次同步需要下载 36GB 数据，过程中任何网络故障都可能造成同步失败，因此你可以选择使用每月更新的初始化包。</p>
+</blockquote>
+<p>所以我选择先下载这个初始包。然后再进行同步。<br>执行命令<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">wget</span> <span class="url">http://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar</span> <span class="comment"># 下载初始化包</span></span><br><span class="line">tar xf aosp-latest.tar</span><br><span class="line">cd AOSP   <span class="comment"># 解压得到的 AOSP 工程目录</span></span><br><span class="line">repo sync <span class="comment"># 正常同步</span></span><br></pre></td></tr></table></figure></p>
+<p>如果提示repo命令没找到，可以通过命令 <code>brew install repo</code> 来直接安装。<br>如果没有brew,可以执行<code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code>来安装。<br>然后开始同步，同步过程中碰到一个错误<br>提示<code>result=56, HTTP code = 200</code> , 后来发现是git的一个bug，原本的git版本是2.4.9，将git升级到最新版2.6.4就解决了。</p>
+<h1 id="编译">编译</h1><p>首先执行<code>source build/envsetup.sh</code>设置环境变量，然后使用lunch命令选择构建目标。<br>接着在AOSP目录下执行<code>make -j4</code>就可以开始编译了。<br>过程中碰到一堆错误。</p>
+<ul>
+<li><p>提示<code>build/core/config.mk:596: *** Error: could not find jdk tools.jar</code>，其实第一次make没有这个错误，但是中间手贱装了个java8，然后就找不到这个文件了。网上找了一些方法都不能解决，最后根据错误提示，在config.mk的596行附近看了下，发现它是调用了一个叫<code>find-jdk-tools-jar.sh</code>的脚本，然后又看了下这个脚本的代码，主要逻辑就是先寻找 <code>ANDROID_JAVA_HOME</code> 是否被定义，如果有，就返回<code>$ANDROID_JAVA_HOME/lib/tools.jar</code>，于是我自己定义了一下，<code>export ANDROID_JAVA_HOME=&quot;$(/usr/libexec/java_home -v 1.7)&quot;</code>，成功解决。</p>
+</li>
+<li><p>提示 <code>Unsupported curl, please use a curl not based on SecureTransport</code> ，搜了了下发现只有stackover上有人问了同样的问题，但没有人解答。刚开始以为是版本问题，于是换了一个最新版本的curl，但是没解决，不清楚这个不基于SecureTransport的curl是怎么样的。后来在元旦节这天，有人给出了<a href="http://stackoverflow.com/questions/33318756/while-i-make-the-source-of-android-6-0-it-failed" target="_blank" rel="external">解决方法</a>，原来是要用openssl重新编译一个curl。<br>首先下载<a href="http://curl.haxx.se/download.html" target="_blank" rel="external">curl源码</a>，然后执行</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/configure --prefix=/</span>usr<span class="regexp">/local/</span>curl --with-ssl=<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>openssl/<span class="number">1.0</span><span class="number">.2</span>d_1</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个1.0.2d_1需要根据自己本地实际版本进行更改，我这里是1.0.2e，最后将 <code>/usr/local/curl/bin</code> 添加到环境变量。可以使用 <code>curl --version</code>，查看一下，如果没有出现SecureTransport，而是出现OpenSSL，则表明替换成功。</p>
+<ul>
+<li>提示 <code>No Jack server running. Try &#39;jack-admin start-server&#39;</code><br>jack服务器开启失败。原因是之前手动创建了一个 .jack-server文件夹，删了之后重新make一下就可以了。</li>
+</ul>
+<p>make 完之后，就可以尝试刷进手机了。但是我并没有nexus手机，所以只能在模拟器上玩了。</p>
+<h1 id="在Android_Studio上阅读源码">在Android Studio上阅读源码</h1><p>在AOSP根目录执行 <code>make idegen &amp;&amp; development/tools/idegen/idegen.sh</code>，然后直接用Android Studio打开生成的android.ipr 文件就可以了。</p>
+<h1 id="参考">参考</h1><ul>
+<li><p><a href="https://source.android.com/source/initializing.html" target="_blank" rel="external">AOSP官方说明</a></p>
+</li>
+<li><p><a href="http://mirrors.tuna.tsinghua.edu.cn/help/#AOSP" target="_blank" rel="external">Android 镜像使用帮助
+</a></p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="背景">背景</h1><p>前几天心血来潮想编译Android源码，总共花了大概三天的时间，碰到一些问题，记录一下防止以后忘掉。</p>
+<h1 id="本地环境">本地环境</h1><p>系统版本： OS X 10.11.2<br>git : 2.6.4<br>port :2.3.4<br>make : 3.81<br>curl : 7.46.0</p>
+<h1 id="环境配置">环境配置</h1><p>首先需要一个区分大小写的硬盘,至少要100G，我是在一个移动硬盘上编译，所以直接磁盘工具-&gt;选择硬盘-&gt;抹掉,格式选择第二个”OS X扩展（区分大小写，日志式）”就可以了。</p>]]>
+    
+    </summary>
+    
+      <category term="AOSP" scheme="http://seewhy93.github.io/tags/AOSP/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第六章 Android的Drawable]]></title>
