@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy93.github.io/"/>
-  <updated>2016-01-03T11:56:37.000Z</updated>
+  <updated>2016-02-15T15:32:47.000Z</updated>
   <id>http://seewhy93.github.io/</id>
   
   <author>
@@ -16,12 +16,113 @@
   
   <entry>
     <title><![CDATA[artsearchreadnote8]]></title>
+    <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote7/"/>
+    <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote7/</id>
+    <published>2016-01-03T11:56:37.000Z</published>
+    <updated>2016-02-15T15:32:47.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="7-1_view动画">7.1 view动画</h1><p>View动画，有4种，平移、选择、缩放、透明度动画。</p>
+<p>可以通过接口AnimationListener监听动画。</p>
+<h2 id="7-1-2_自定义动画">7.1.2 自定义动画</h2><p>继承Animation抽象类，重写initalize和applyTransformation方法。</p>
+<p>在applyTransformation进行矩阵变换，可以实现3D效果。</p>
+<a id="more"></a>
+<h2 id="7-1-3_帧动画">7.1.3 帧动画</h2><p>使用AnimationDrawable实现帧动画。</p>
+<p>创建<animation-list>标签，</animation-list></p>
+<p>然后</p>
+<p>mButton.setBackGroundResource(R.drawable.frame_animation);</p>
+<p>AnimationDrawable drawable = (AnimationDrawable)mButton.getBackGround();</p>
+<p>drawable.start();</p>
+<p>使用简单，但是容易OOM，尽量避免使用过多尺寸较大的图片。</p>
+<h1 id="7-2_View动画的特殊使用场景">7.2 View动画的特殊使用场景</h1><h2 id="7-2-1_LayoutAnimation">7.2.1 LayoutAnimation</h2><p>可以为ViewGroup的子元素指定动画。</p>
+<h2 id="7-2-2_Activity的切换效果">7.2.2 Activity的切换效果</h2><p>通过overridePendingTransition(int enterAnim, int exitAnim)方法。</p>
+<p>必须在startActivity或finish方法之后被调用。</p>
+<p>fragment可以通过</p>
+<p>FragmentTransition的setCustomAnimations方法添加动画。</p>
+<h1 id="7-3_属性动画">7.3 属性动画</h1><p>默认时间300ms，默认帧率10ms/帧。</p>
+<p>从API 11之后才能使用，之前可以使用nineoldandroid来实现属性动画。</p>
+<p>xml属性动画需要定义在res/animator下</p>
+<p>ObjectAnimator继承自ValueAnimator,AnimatorSet是动画合集。</p>
+<p><set>标签的ordering属性如果设为together，则所有动画同时开始播放。</set></p>
+<p>如果是sequentially，则依次播放。默认为together。</p>
+<p><animator>对应ValueAnimator</animator></p>
+<p><objectanimator>对应ObjectAnimator</objectanimator></p>
+<p><animator>比<objectanimator>少一个propertyName属性</objectanimator></animator></p>
+<p>android:valueType表示propertyName的类型，有intType喝floatType两种，如果是颜色则不需要指定，系统自动处理。</p>
+<p>android:repeatCount默认为0，-1表示无限循环。</p>
+<p>使用方式：</p>
+<p>Animator set = (Animator) AnimatorInflater.loadAnimatior(mContext, R.anim.animator);</p>
+<p>set.setTarget(btn);</p>
+<p>set.start();</p>
+<h2 id="7-3-2_插值器和估值器">7.3.2 插值器和估值器</h2><p>系统预置的TimeInterpolator有：</p>
+<p>LinearInterpolator线性插值器</p>
+<p>AccelerateDecelerateInterpolator加速加速插值器</p>
+<p>DecelerateInterpolator减速插值器</p>
+<p>TypeEvaluator类型估值器</p>
+<p>系统预置的有IntEvaluator、FloatEvaluator、ArgbEvaluator(针对颜色)</p>
+<h2 id="7-3-3_属性动画的监听器">7.3.3 属性动画的监听器</h2><p>主要有2个接口：<br>AnimatorUpdateListener和AnimatorListener。<br>同时提供AnimatorListenerAdapter类，可以部分实现需要的方法。</p>
+<h2 id="7-3-4_对任意属性做动画">7.3.4 对任意属性做动画</h2><p>对对象object的属性abc做动画，必须要满足：</p>
+<ol>
+<li>object必须提供setAbc方法。如果动画的时候没有传递初始值，还要提供getAbc方法，因为系统要去取abc属性的初始值，如果不满足，直接crash。</li>
+<li>object的setAbc对属性abc所做的改变必须能够通过某种方式反映出来，比如改变UI，如果不满足，动画无效果。</li>
+</ol>
+<p>Button的setWidth方法实际是属于TextView的，不能用来设置宽度。<br>解决方法：</p>
+<ol>
+<li>如果有权限，给对象加上get、set方法。</li>
+<li>用一个类包装原始对象，间接提高get、set方法。（wrapper模式）</li>
+<li>shiy ValueAnimator，监听动画过程，自己实现属性改变。</li>
+</ol>
+<h2 id="7-3-5_属性动画的工作原理">7.3.5 属性动画的工作原理</h2><p>通过反射调用get和set方法。</p>
+<h1 id="7-4">7.4</h1><p>使用动画的注意事项</p>
+<ol>
+<li>避免使用帧动画，当图片数量多并且较大时容易OOM。</li>
+<li>内存泄露，无限循环的动画需要在activity退出时停止，否则会内存泄露。view动画不存在此问题。</li>
+<li>3.0以下无法使用属性动画，可以使用nineoldandroid。</li>
+<li>view动画是对view的影像做动画。如果view动画完成后无法隐藏，即setVisibility(View.GONE)失效，可以调用view.clearAnimation清除view动画解决。</li>
+<li>动画过程中不要使用px而是使用dp，否则在不同dpi设备会有不同效果。</li>
+<li>3.0之前,view动画或者属性动画平移后，都不能再新位置点击。3.0之后，属性动画点击位置为平移后，view动画在平移前。</li>
+<li>建议开启硬件加速提供动画流畅性。</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="7-1_view动画">7.1 view动画</h1><p>View动画，有4种，平移、选择、缩放、透明度动画。</p>
+<p>可以通过接口AnimationListener监听动画。</p>
+<h2 id="7-1-2_自定义动画">7.1.2 自定义动画</h2><p>继承Animation抽象类，重写initalize和applyTransformation方法。</p>
+<p>在applyTransformation进行矩阵变换，可以实现3D效果。</p>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[artsearchreadnote8]]></title>
     <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote8/"/>
     <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote8/</id>
     <published>2016-01-03T11:56:37.000Z</published>
-    <updated>2016-01-03T11:56:37.000Z</updated>
-    <content type="html"></content>
+    <updated>2016-02-15T15:34:04.000Z</updated>
+    <content type="html"><![CDATA[<p>Window是一个抽象类，具体实现是PhoneWindow。</p>
+<h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>
+<a id="more"></a>
+<p>应用Window对应一个Activity，子Window不能单独存在，要依附于父Window。</p>
+<p>系统Window需要声明权限才能创建，如Toast和系统状态栏。</p>
+<p>应用Window层级是1~99，子Window层级1000~1999,系统Window2000~2999。</p>
+<p>ViewManager接口提供了添加、更新和删除View的三个方法。WIndowManager接口继承了ViewManager。</p>
+<h1 id="8-2_Window的内部机制">8.2 Window的内部机制</h1><h2 id="8-2-1_Window的添加过程">8.2.1 Window的添加过程</h2><p>WindowManagerImpl的addView实际上是调用WindowManagerGlobal的addView。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> final WindowManagerGlobal mGlobal = WindowManagerGlobal.getInstance();</span><br><span class="line"></span><br><span class="line">@<span class="function">Override</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addView</span>(<span class="params">@NonNull View view, @NonNull ViewGroup.LayoutParams <span class="keyword">params</span></span>) </span>&#123;</span><br><span class="line">   applyDefaultToken(<span class="keyword">params</span>);</span><br><span class="line">   mGlobal.addView(view, <span class="keyword">params</span>, mDisplay, mParentWindow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而 mGlobal.addView创建了一个ViewRootImpl，然后通过ViewRootImpl的setView来更新界面。</p>
+<p>setView内部通过requestLayout来完成异步刷新请求。最后通过WindowSession来完成最后的Window添加过程。添加是一次IPC调用。</p>
+<p>Session内部通过WindowManagerService的addToDisplay方法实现Window的添加。</p>
+<h2 id="8-2-2_Window的删除过程">8.2.2 Window的删除过程</h2><p>ViewRootImpl的die(boolean immediate)方法。</p>
+<p>如果是异步的，将要删除的view放入mDyingViews中，然后发送一个MSG_DIE的消息。</p>
+<p>同步的，就调用doDie方法，内部调用dispatchDetachedFromWindow();</p>
+<p>主要工作是</p>
+<p>1）垃圾回收，清楚数据和消息，移除回调。</p>
+<p>2）通过Session的remove方法删除Window，同样是一个IPC过程，最终调用WMS的removeWindow。</p>
+<p>3）调用View的dispatchDetachedFromWindow。</p>
+<p>4）调用WindowManagerGlobal的doRemoveView方法刷新数据包。包括mRoots、mParams和mDyingViews，</p>
+<p>需要将当期Window所关联的这三类对象从列表中删除。</p>
+]]></content>
     <summary type="html">
+    <![CDATA[<p>Window是一个抽象类，具体实现是PhoneWindow。</p>
+<h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>]]>
     
     </summary>
     
