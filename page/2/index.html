@@ -8,7 +8,7 @@
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="闲池阁">
-<meta property="og:url" content="http://seewhy93.github.io/page/2/index.html">
+<meta property="og:url" content="http://seewhy.me/page/2/index.html">
 <meta property="og:site_name" content="闲池阁">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -129,6 +129,8 @@ var _hmt = _hmt || [];
 					        
 								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 					        
+								<a class="twitter" target="_blank" href="https://twitter.com/seewhy163" title="twitter">twitter</a>
+					        
 						</div>
 					</nav>
 				</section>
@@ -147,7 +149,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part3">
 				
-					<div id="js-aboutme">hello seewhy</div>
+					<div id="js-aboutme">Android开发者</div>
 				</section>
 				
 			</div>
@@ -193,135 +195,14 @@ var _hmt = _hmt || [];
 			        
 						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
 			        
+						<a class="twitter" target="_blank" href="https://twitter.com/seewhy163" title="twitter">twitter</a>
+			        
 				</div>
 			</nav>
 		</header>				
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-artsearchreadnote5" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/18/artsearchreadnote5/" class="article-date">
-  	<time datetime="2015-12-18T13:35:53.000Z" itemprop="datePublished">2015-12-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/18/artsearchreadnote5/">Android开发艺术探索读书笔记 第五章 理解remoteViews</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="5-1-1">5.1.1</h1><p>RemoteViews用于自定义Notification。<br>PendingIntent表示待定Intent，包含的意图由用户触发。</p>
-<h1 id="5-1-3">5.1.3</h1><p>PendingIntent支持三种待定意图：启动Activity，启动Service和发送广播。<br>getActivity(Context context,int requestCode, Intent intent, int flags)<br>如果两个PendingIntent内部的Intent相同并且requestCode也相同，那么这两个PendingIntent是相同的。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/18/artsearchreadnote5/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-AndFixIntroduce" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/15/AndFixIntroduce/" class="article-date">
-  	<time datetime="2015-12-14T16:41:51.000Z" itemprop="datePublished">2015-12-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/15/AndFixIntroduce/">AndFix使用介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
-<h1 id="使用方式">使用方式</h1><ol>
-<li>首先添加依赖<br><code>compile &#39;com.alipay.euler:andfix:0.3.1@aar&#39;</code></li>
-<li>然后在Application.onCreate() 中添加以下代码<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">patchManager = new PatchManager(context)<span class="comment">;</span></span><br><span class="line">patchManager.init(appversion)<span class="comment">;//current version</span></span><br><span class="line">patchManager.loadPatch()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>可以用这句话获取appversion<br><code>String appversion= getPackageManager().getPackageInfo(getPackageName(), 0).versionName;</code><br>注意每次appversion变更都会导致所有补丁被删除,如果appversion没有改变，则会加载已经保存的所有补丁。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热补丁/">热补丁</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/15/AndFixIntroduce/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
   
     <article id="post-artsearchreadnote4" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -524,9 +405,286 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-artsearchreadnote1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/17/artsearchreadnote1/" class="article-date">
+  	<time datetime="2015-11-17T13:38:42.000Z" itemprop="datePublished">2015-11-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/17/artsearchreadnote1/">《Android开发艺术探索》读书笔记 第一章 生命周期与启动模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
+<h1 id="1-1-1_典型情况生命周期分析">1.1.1 典型情况生命周期分析</h1><ul>
+<li><p>onStart、onResume与onPause、onStop有什么实质不同？<br>onStart、onStop是从是否可见来描述，onResume和onPause是从是否可与用户交互的角度。</p>
+</li>
+<li><p>在启动新activity时，先执行旧activity的onPause，然后再是新activiy的onCreate,onStart,onResume。</p>
+</li>
+<li><p>如果新的activity是透明的，那么原activity不会执行onStop。（没有变成不可见）</p>
+</li>
+<li><p>设置activity透明的方法</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:windowBackground"</span>&gt;@android:color/transparent&lt;/<span class="property">item</span>&gt;
+</code></pre></li>
+</ul>
+<h1 id="1-1-2_异常情况生命周期">1.1.2 异常情况生命周期</h1><ul>
+<li><p>系统在activity异常终止的时候会调用onSaveInstanceState存储数据，onRestoreInstanceState恢复数据。</p>
+</li>
+<li><p>按Home或启动新activity也会触发onSaveInstanceState。</p>
+</li>
+<li><p>内存不足时杀死进程会触发onSaveInstanceState、onRestoreInstanceState</p>
+</li>
+<li><p>转屏时触发onSaveInstanceState,如果要转屏时不触发，需要设置android:configChanges=”orientation”<br>如果是api&gt;=13,需设置android:configChanges=”orientation|screenSize”，<br>设置后转屏时回调 onConfigurationChanged</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/17/artsearchreadnote1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-stethoIntroduce" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/14/stethoIntroduce/" class="article-date">
+  	<time datetime="2015-10-14T12:07:44.000Z" itemprop="datePublished">2015-10-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/14/stethoIntroduce/">stetho使用介绍</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍">介绍</h1><p>stetho是facebook开发的Android调试工具。它可以通过chrome的开发者工具来辅助安卓开发。<br>总的来说，提供了一下几个功能：</p>
+<ul>
+<li>通过Elements标签查看界面的视图结构。</li>
+<li>通过Network标签观察网络请求。</li>
+<li>通过Resources标签查看本地数据，比如sqlite数据库，sharepreference等等。同时可以在这里执行sql语句。</li>
+<li>通过Console标签，在这里执行js语句，可以在APP上弹出一个Toast。</li>
+<li>dumpapp 是linux/mac上使用的命令行工具，可以修改app内部资源，暂时未详细了解。</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/10/14/stethoIntroduce/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-使用python完成重复任务" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/29/使用python完成重复任务/" class="article-date">
+  	<time datetime="2015-09-29T15:33:10.000Z" itemprop="datePublished">2015-09-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/29/使用python完成重复任务/">使用python完成重复任务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
+<p>于是我又跟他说，android studio的重命名快捷键也可以对图片操作的，先把中文名的图片导入，<br>接着只要改了其中一个dpi的文件名,其他dpi也会自动改过来。<br>然而现在已经是一个dpi变了而其他的并没有变成英文的。最终这个重复劳动还是让我来做了，<br>以后新加的图片会考虑用我说的方法。</p>
+<p>然后开始思考有没有方便的方法，一个个手动重命名实在太蠢了。<br>想到了两个方法:</p>
+<ol>
+<li>还是利用android studio的快捷键，找到中英文对应的图片，然后用快捷键把中文名改成英文名。</li>
+<li>找到中英文的映射关系记录到一个字典里，然后用脚本实现批量重命名。</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/效率/">效率</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/29/使用python完成重复任务/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-baishiinterview" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/31/baishiinterview/" class="article-date">
+  	<time datetime="2015-08-31T11:15:46.000Z" itemprop="datePublished">2015-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/baishiinterview/">百世实习生面试总结</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
+<p>问的问题：</p>
+<h1 id="安卓方面">安卓方面</h1><ul>
+<li><p>activity生命周期。<br>都说出来了。</p>
+</li>
+<li><p>activity的启动方式有哪些,singleTask与singleInstance的应用场景。<br>场景只说了singleInstance就 问下一个问题了，举了一个闹钟的例子，之前网上看的。<br><a href="http://xiazdong.me/2015/03/08/android-launchmode-application/">http://xiazdong.me/2015/03/08/android-launchmode-application/</a></p>
+</li>
+<li><p>线程与进程的区别<br>大概说了一下，线程是最小的进程，一个进程内的线程共享资源，一个app就是一个进程等等，说的有点模糊。<br>​</p>
+</li>
+<li>universal image loader的运行流程，存储图片的方式、原理。<br>之前两次阿里面试都问到了类似的问题，于是看了它的源码。<br>这次基本上回答出来了吧。默认用的LruCache，然后原理也说了下。</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/31/baishiinterview/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

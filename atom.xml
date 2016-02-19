@@ -3,9 +3,9 @@
   <title><![CDATA[闲池阁]]></title>
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://seewhy93.github.io/"/>
-  <updated>2016-02-16T12:06:52.000Z</updated>
-  <id>http://seewhy93.github.io/</id>
+  <link href="http://seewhy.me/"/>
+  <updated>2016-02-19T16:58:50.000Z</updated>
+  <id>http://seewhy.me/</id>
   
   <author>
     <name><![CDATA[seewhy]]></name>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Android开发艺术探索读书笔记 第七章 Android动画深入分析]]></title>
-    <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote9/"/>
-    <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote9/</id>
+    <title><![CDATA[Android开发艺术探索读书笔记 第九章 Android动画深入分析]]></title>
+    <link href="http://seewhy.me/2016/01/03/artsearchreadnote9/"/>
+    <id>http://seewhy.me/2016/01/03/artsearchreadnote9/</id>
     <published>2016-01-03T11:56:37.000Z</published>
-    <updated>2016-02-16T12:06:52.000Z</updated>
+    <updated>2016-02-19T16:58:50.000Z</updated>
     <content type="html"><![CDATA[<h1 id="7-1_view动画">7.1 view动画</h1><p>View动画，有4种，平移、选择、缩放、透明度动画。</p>
 <p>可以通过接口AnimationListener监听动画。</p>
 <h2 id="7-1-2_自定义动画">7.1.2 自定义动画</h2><p>继承Animation抽象类，重写initalize和applyTransformation方法。</p>
@@ -90,14 +90,14 @@
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第七章 Android动画深入分析]]></title>
-    <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote7/"/>
-    <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote7/</id>
+    <link href="http://seewhy.me/2016/01/03/artsearchreadnote7/"/>
+    <id>http://seewhy.me/2016/01/03/artsearchreadnote7/</id>
     <published>2016-01-03T11:56:37.000Z</published>
     <updated>2016-02-15T15:44:23.000Z</updated>
     <content type="html"><![CDATA[<h1 id="7-1_view动画">7.1 view动画</h1><p>View动画，有4种，平移、选择、缩放、透明度动画。</p>
@@ -170,16 +170,16 @@
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第八章 理解Window和WindowManager]]></title>
-    <link href="http://seewhy93.github.io/2016/01/03/artsearchreadnote8/"/>
-    <id>http://seewhy93.github.io/2016/01/03/artsearchreadnote8/</id>
+    <link href="http://seewhy.me/2016/01/03/artsearchreadnote8/"/>
+    <id>http://seewhy.me/2016/01/03/artsearchreadnote8/</id>
     <published>2016-01-03T11:56:37.000Z</published>
-    <updated>2016-02-15T15:45:03.000Z</updated>
+    <updated>2016-02-19T17:38:43.000Z</updated>
     <content type="html"><![CDATA[<p>Window是一个抽象类，具体实现是PhoneWindow。</p>
 <h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>
 <a id="more"></a>
@@ -201,21 +201,22 @@
 <p>3）调用View的dispatchDetachedFromWindow。</p>
 <p>4）调用WindowManagerGlobal的doRemoveView方法刷新数据包。包括mRoots、mParams和mDyingViews，</p>
 <p>需要将当期Window所关联的这三类对象从列表中删除。</p>
-]]></content>
+<h2 id="8-2-3_Window的更新过程">8.2.3 Window的更新过程</h2><p>首先更新view的LayoutParams，再更新viewRootImpl的LayoutParams，实现对View的重新测量，布局，重绘，最后通过WindowSession更新Window的视图，WindowManagerService.relayoutWindow()。</p>
+<h1 id="8-3_Window的创建过程">8.3 Window的创建过程</h1>]]></content>
     <summary type="html">
     <![CDATA[<p>Window是一个抽象类，具体实现是PhoneWindow。</p>
 <h1 id="8-1_Window和WindowManager">8.1 Window和WindowManager</h1><p>FLAG_NOT_FOCUSABLE<br>表示Window不需要获取焦点，也不需要接收各种输入事件，此标记会同时开启FLAG_NOT_TOUCH_MODAL<br>FLAG_NOT_TOUCH_MODAL<br>开启后可以将当期WWindow区域以外的事件传递给底层Window。<br>FLAG_SHOW_WHEN_LOCKED<br>开启此模式可以让Window显示在锁屏上<br>Type参数表示Window的类型，有三种，应用Window,子Window和系统Window。</p>]]>
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[在Mac 10.11中编译Android 6.0源码]]></title>
-    <link href="http://seewhy93.github.io/2016/01/01/aospcompilation/"/>
-    <id>http://seewhy93.github.io/2016/01/01/aospcompilation/</id>
+    <link href="http://seewhy.me/2016/01/01/aospcompilation/"/>
+    <id>http://seewhy.me/2016/01/01/aospcompilation/</id>
     <published>2016-01-01T14:09:01.000Z</published>
     <updated>2016-01-01T18:38:37.000Z</updated>
     <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>前几天心血来潮想编译Android源码，总共花了大概三天的时间，碰到一些问题，记录一下防止以后忘掉。</p>
@@ -262,14 +263,14 @@
     
     </summary>
     
-      <category term="AOSP" scheme="http://seewhy93.github.io/tags/AOSP/"/>
+      <category term="AOSP" scheme="http://seewhy.me/tags/AOSP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第六章 Android的Drawable]]></title>
-    <link href="http://seewhy93.github.io/2015/12/27/artsearchreadnote6/"/>
-    <id>http://seewhy93.github.io/2015/12/27/artsearchreadnote6/</id>
+    <link href="http://seewhy.me/2015/12/27/artsearchreadnote6/"/>
+    <id>http://seewhy.me/2015/12/27/artsearchreadnote6/</id>
     <published>2015-12-27T14:07:03.000Z</published>
     <updated>2015-12-27T14:10:42.000Z</updated>
     <content type="html"><![CDATA[<p>Drawable表示可以在Canvas上进行绘制的抽象的概念。</p>
@@ -305,14 +306,14 @@
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第五章 理解remoteViews]]></title>
-    <link href="http://seewhy93.github.io/2015/12/18/artsearchreadnote5/"/>
-    <id>http://seewhy93.github.io/2015/12/18/artsearchreadnote5/</id>
+    <link href="http://seewhy.me/2015/12/18/artsearchreadnote5/"/>
+    <id>http://seewhy.me/2015/12/18/artsearchreadnote5/</id>
     <published>2015-12-18T13:35:53.000Z</published>
     <updated>2015-12-27T14:10:57.000Z</updated>
     <content type="html"><![CDATA[<h1 id="5-1-1">5.1.1</h1><p>RemoteViews用于自定义Notification。<br>PendingIntent表示待定Intent，包含的意图由用户触发。</p>
@@ -332,14 +333,14 @@
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[AndFix使用介绍]]></title>
-    <link href="http://seewhy93.github.io/2015/12/15/AndFixIntroduce/"/>
-    <id>http://seewhy93.github.io/2015/12/15/AndFixIntroduce/</id>
+    <link href="http://seewhy.me/2015/12/15/AndFixIntroduce/"/>
+    <id>http://seewhy.me/2015/12/15/AndFixIntroduce/</id>
     <published>2015-12-14T16:41:51.000Z</published>
     <updated>2015-12-27T14:15:35.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>AndFix，全称是<strong>And</strong>roid hot-<strong>fix</strong>。是阿里开源的一个Android热补丁框架，允许APP在不重新发布版本的情况下修复线上的bug。支持Android 2.3 到 6.0。</p>
@@ -393,14 +394,14 @@
     
     </summary>
     
-      <category term="热补丁" scheme="http://seewhy93.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81/"/>
+      <category term="热补丁" scheme="http://seewhy.me/tags/%E7%83%AD%E8%A1%A5%E4%B8%81/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第四章 view的工作原理]]></title>
-    <link href="http://seewhy93.github.io/2015/11/23/artsearchreadnote4/"/>
-    <id>http://seewhy93.github.io/2015/11/23/artsearchreadnote4/</id>
+    <link href="http://seewhy.me/2015/11/23/artsearchreadnote4/"/>
+    <id>http://seewhy.me/2015/11/23/artsearchreadnote4/</id>
     <published>2015-11-23T12:56:08.000Z</published>
     <updated>2015-11-23T13:09:35.000Z</updated>
     <content type="html"><![CDATA[<h1 id="4-1">4.1</h1><p>ViewRoot对应于ViewRootImpl类，是连接WindowManager和DecorView的纽带。View的三大流程都是通过ViewRoot来完成的。在ActivityThread中,当activity被创建完毕，会将DecorView添加到Window中，同时<br>会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联。</p>
@@ -457,14 +458,14 @@
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android开发艺术探索读书笔记 第三章 view的事件体系]]></title>
-    <link href="http://seewhy93.github.io/2015/11/23/artsearchreadnote3/"/>
-    <id>http://seewhy93.github.io/2015/11/23/artsearchreadnote3/</id>
+    <link href="http://seewhy.me/2015/11/23/artsearchreadnote3/"/>
+    <id>http://seewhy.me/2015/11/23/artsearchreadnote3/</id>
     <published>2015-11-23T12:56:02.000Z</published>
     <updated>2015-11-23T13:00:50.000Z</updated>
     <content type="html"><![CDATA[<h1 id="3-1-2_View的位置参数">3.1.2 View的位置参数</h1><p>x = left + translationX<br>y = top + translationY<br>在平移过程中,top和left表示原始左上角的位置信息，值不变。x,y,translationX和translationY改变。</p>
@@ -585,14 +586,14 @@ myView.requestLayout();
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[《Android开发艺术探索》读书笔记 第二章  IPC机制]]></title>
-    <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote2/"/>
-    <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote2/</id>
+    <link href="http://seewhy.me/2015/11/17/artsearchreadnote2/"/>
+    <id>http://seewhy.me/2015/11/17/artsearchreadnote2/</id>
     <published>2015-11-17T14:37:48.000Z</published>
     <updated>2015-11-17T14:57:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="2-2-1">2.2.1</h1><ul>
@@ -708,14 +709,14 @@ myView.requestLayout();
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[《Android开发艺术探索》读书笔记 第一章 生命周期与启动模式]]></title>
-    <link href="http://seewhy93.github.io/2015/11/17/artsearchreadnote1/"/>
-    <id>http://seewhy93.github.io/2015/11/17/artsearchreadnote1/</id>
+    <link href="http://seewhy.me/2015/11/17/artsearchreadnote1/"/>
+    <id>http://seewhy.me/2015/11/17/artsearchreadnote1/</id>
     <published>2015-11-17T13:38:42.000Z</published>
     <updated>2015-11-17T14:59:05.000Z</updated>
     <content type="html"><![CDATA[<p>最近在读任主席的《Android开发艺术探索》，做一点笔记，防止以后忘掉。并不只是书上的内容，还有一些自己的补充。</p>
@@ -808,14 +809,14 @@ myView.requestLayout();
     
     </summary>
     
-      <category term="读书笔记" scheme="http://seewhy93.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[stetho使用介绍]]></title>
-    <link href="http://seewhy93.github.io/2015/10/14/stethoIntroduce/"/>
-    <id>http://seewhy93.github.io/2015/10/14/stethoIntroduce/</id>
+    <link href="http://seewhy.me/2015/10/14/stethoIntroduce/"/>
+    <id>http://seewhy.me/2015/10/14/stethoIntroduce/</id>
     <published>2015-10-14T12:07:44.000Z</published>
     <updated>2015-10-14T12:19:35.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>stetho是facebook开发的Android调试工具。它可以通过chrome的开发者工具来辅助安卓开发。<br>总的来说，提供了一下几个功能：</p>
@@ -968,14 +969,14 @@ var <span class="operator"><span class="keyword">handler</span> = new <span clas
     
     </summary>
     
-      <category term="工具" scheme="http://seewhy93.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://seewhy.me/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[使用python完成重复任务]]></title>
-    <link href="http://seewhy93.github.io/2015/09/29/%E4%BD%BF%E7%94%A8python%E5%AE%8C%E6%88%90%E9%87%8D%E5%A4%8D%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://seewhy93.github.io/2015/09/29/使用python完成重复任务/</id>
+    <link href="http://seewhy.me/2015/09/29/%E4%BD%BF%E7%94%A8python%E5%AE%8C%E6%88%90%E9%87%8D%E5%A4%8D%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://seewhy.me/2015/09/29/使用python完成重复任务/</id>
     <published>2015-09-29T15:33:10.000Z</published>
     <updated>2015-09-29T17:14:13.000Z</updated>
     <content type="html"><![CDATA[<p>事件背景:<br>接到一个任务，要我完成对很多文件改名字的操作。<br>任务原因是美工切过来的图片都是中文名，于是有人把xhdpi文件夹中的文件改成了英文名，<br>本来这也没什么问题，因为刚开始就说好只用xhdpi的内容，其他不需要放。<br>我问 “为什么会需要其他几个dpi的文件，Android不是会自动进行等比缩放的吗?”<br>答: “以后可能需要。”<br>好吧..</p>
@@ -1049,16 +1050,16 @@ name_map = {
     
     </summary>
     
-      <category term="python" scheme="http://seewhy93.github.io/tags/python/"/>
+      <category term="python" scheme="http://seewhy.me/tags/python/"/>
     
-      <category term="效率" scheme="http://seewhy93.github.io/tags/%E6%95%88%E7%8E%87/"/>
+      <category term="效率" scheme="http://seewhy.me/tags/%E6%95%88%E7%8E%87/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[百世实习生面试总结]]></title>
-    <link href="http://seewhy93.github.io/2015/08/31/baishiinterview/"/>
-    <id>http://seewhy93.github.io/2015/08/31/baishiinterview/</id>
+    <link href="http://seewhy.me/2015/08/31/baishiinterview/"/>
+    <id>http://seewhy.me/2015/08/31/baishiinterview/</id>
     <published>2015-08-31T11:15:46.000Z</published>
     <updated>2015-09-29T17:16:20.000Z</updated>
     <content type="html"><![CDATA[<p>总的来说感觉比较轻松，可能是因为这次只是实习生面试。<br>面试官看过我的博客，知道我面试过阿里，虽然没进，不知道是不是加分项。</p>
@@ -1127,14 +1128,14 @@ name_map = {
     
     </summary>
     
-      <category term="面试" scheme="http://seewhy93.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+      <category term="面试" scheme="http://seewhy.me/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[象文面试总结]]></title>
-    <link href="http://seewhy93.github.io/2015/07/15/xiangweninterview/"/>
-    <id>http://seewhy93.github.io/2015/07/15/xiangweninterview/</id>
+    <link href="http://seewhy.me/2015/07/15/xiangweninterview/"/>
+    <id>http://seewhy.me/2015/07/15/xiangweninterview/</id>
     <published>2015-07-15T12:13:40.000Z</published>
     <updated>2015-09-29T17:16:12.000Z</updated>
     <content type="html"><![CDATA[<p>昨天接到一个电话，说是在网上看到我的简历，问要不要去面试。<br>上一次面试是阿里的，结果惨败。于是想见识一些普通公司的面试，就答应了。<br>然后就定在今天下午。</p>
@@ -1201,14 +1202,14 @@ name_map = {
     
     </summary>
     
-      <category term="面试" scheme="http://seewhy93.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+      <category term="面试" scheme="http://seewhy.me/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Android fragment]]></title>
-    <link href="http://seewhy93.github.io/2015/05/09/fragment%E8%A7%A3%E6%9E%90/"/>
-    <id>http://seewhy93.github.io/2015/05/09/fragment解析/</id>
+    <link href="http://seewhy.me/2015/05/09/fragment%E8%A7%A3%E6%9E%90/"/>
+    <id>http://seewhy.me/2015/05/09/fragment解析/</id>
     <published>2015-05-09T01:26:04.000Z</published>
     <updated>2015-09-29T17:16:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="介绍">介绍</h1><p>fragment是android 3.0（API 11） 中引入的。可以将fragment看成是activity中的一个模块，也有自己的生命周期，能够处理用户事件。</p>
@@ -1266,9 +1267,9 @@ name_map = {
     
     </summary>
     
-      <category term="Android" scheme="http://seewhy93.github.io/tags/Android/"/>
+      <category term="Android" scheme="http://seewhy.me/tags/Android/"/>
     
-      <category term="fragment" scheme="http://seewhy93.github.io/tags/fragment/"/>
+      <category term="fragment" scheme="http://seewhy.me/tags/fragment/"/>
     
   </entry>
   
