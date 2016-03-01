@@ -4,7 +4,7 @@
   <subtitle><![CDATA[宠辱不惊，看庭前花开花落。去留无意，望天空云卷云舒。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://seewhy.me/"/>
-  <updated>2016-02-19T18:27:43.000Z</updated>
+  <updated>2016-03-01T17:38:50.000Z</updated>
   <id>http://seewhy.me/</id>
   
   <author>
@@ -19,21 +19,27 @@
     <link href="http://seewhy.me/2016/02/20/artsearchreadnote9/"/>
     <id>http://seewhy.me/2016/02/20/artsearchreadnote9/</id>
     <published>2016-02-20T06:51:39.000Z</published>
-    <updated>2016-02-19T18:27:43.000Z</updated>
+    <updated>2016-03-01T17:38:50.000Z</updated>
     <content type="html"><![CDATA[<h1 id="9-1_四大组件的运行状态">9.1 四大组件的运行状态</h1><p>四大组件除了BroadcastReceiver，其他都必须在AndroidManifest中注册。<br>BroadcastReceiver可以在AndroidManifest静态注册，也可以动态注册。</p>
 <p>Activity的主要作用是展示一个界面和用户交互。</p>
 <p>Service是一种计算型组件，用于在后台执行一系列计算任务。Service有两种状态，启动状态和绑定状态。启动状态时，不需要和外界直接交互。绑定状态可以和外界通信。Service运行在主线程中。 </p>
 <p>BroadcastReceiver静态注册在安装时被系统解析，动态注册通过Context.registerReceiver()。</p>
-<p> ContentProvider是一种共享型组件，用于向其他组件乃至其他应用共享数据。</p>
-<p> Activity<br> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094304318.png" alt=""></p>
-<p> ContentProvider<br> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002095010807.png" alt=""></p>
-<p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094641495.png" alt=""></p>
-<p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094725602.png" alt=""></p>
-<p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094832822.png" alt=""></p>
-<p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094847398.png" alt=""></p>
+<a id="more"></a>
+<p>ContentProvider是一种共享型组件，用于向其他组件乃至其他应用共享数据。</p>
+<p>关于四大组件的运行流程，我发现<a href="http://blog.csdn.net/amurocrash/article/details/48858353" target="_blank" rel="external">@amurocrash</a>使用UML的方式来分析，结构非常清晰，因此就引用了他的图片，感谢作者。</p>
+<h1 id="Activity">Activity</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094304318.png" alt=""></p>
+<h1 id="ContentProvider">ContentProvider</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002095010807.png" alt=""></p>
+<h1 id="Service#start">Service#start</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094641495.png" alt=""></p>
+<h1 id="Service#bind">Service#bind</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094725602.png" alt=""></p>
+<h1 id="BroadcastReceiver#register">BroadcastReceiver#register</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094832822.png" alt=""></p>
+<h1 id="BroadcastReceiver#_send$receive">BroadcastReceiver# send$receive</h1><p> <img src="http://7xiw1r.com1.z0.glb.clouddn.com/20151002094847398.png" alt=""></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="9-1_四大组件的运行状态">9.1 四大组件的运行状态</h1><p>四大组件除了BroadcastReceiver，其他都必须在AndroidManifest中注册。<br>BroadcastReceiver可以在AndroidManifest静态注册，也可以]]>
+    <![CDATA[<h1 id="9-1_四大组件的运行状态">9.1 四大组件的运行状态</h1><p>四大组件除了BroadcastReceiver，其他都必须在AndroidManifest中注册。<br>BroadcastReceiver可以在AndroidManifest静态注册，也可以动态注册。</p>
+<p>Activity的主要作用是展示一个界面和用户交互。</p>
+<p>Service是一种计算型组件，用于在后台执行一系列计算任务。Service有两种状态，启动状态和绑定状态。启动状态时，不需要和外界直接交互。绑定状态可以和外界通信。Service运行在主线程中。 </p>
+<p>BroadcastReceiver静态注册在安装时被系统解析，动态注册通过Context.registerReceiver()。</p>]]>
+    
     </summary>
     
       <category term="读书笔记" scheme="http://seewhy.me/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
